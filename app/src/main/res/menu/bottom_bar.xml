@@ -3,18 +3,22 @@
 
     <item
         android:id="@+id/home"
+        android:icon="@drawable/ic_home"
         android:title="@string/home" />
 
     <item
         android:id="@+id/favoritos"
+        android:icon="@drawable/ic_favourites"
         android:title="@string/favoritos" />
 
     <item
         android:id="@+id/adopcion"
+        android:icon="@drawable/ic_adoption"
         android:title="@string/adopcion" />
 
     <item
         android:id="@+id/publicacion"
+        android:icon="@drawable/ic_publication"
         android:title="@string/publicacion" />
 
 </menu>
