@@ -3,4 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="drawer_layout_behavior">androidx.drawerlayout.widget.DrawerLayout$DrawerLayoutCompat</string>
+    <string name="perfil">Perfil</string>
+    <string name="configuracion">Configuración</string>
+    <string name="home">Home</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="adopcion">Adopción</string>
+    <string name="publicacion">Publicación</string>
 </resources>

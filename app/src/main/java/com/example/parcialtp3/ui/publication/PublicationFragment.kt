@@ -1,4 +1,4 @@
-package com.example.parcialtp3.ui.dashboard
+package com.example.parcialtp3.ui.publication
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.parcialtp3.databinding.FragmentDashboardBinding
+import com.example.parcialtp3.databinding.FragmentPublicationBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class DashboardFragment : Fragment() {
+@AndroidEntryPoint
+class PublicationFragment: Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentPublicationBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +24,14 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        val adoptionViewModel =
+            ViewModelProvider(this).get(PublicationViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentPublicationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
+        adoptionViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
@@ -39,4 +41,4 @@ class DashboardFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-}
+} 
