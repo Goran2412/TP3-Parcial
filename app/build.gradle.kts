@@ -64,7 +64,7 @@ dependencies {
 
     //Activity-KTX
     implementation("androidx.activity:activity-ktx:1.7.2")
-    //  ML Kit
+
     ///Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
@@ -93,5 +93,13 @@ dependencies {
     //Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.44.2")
     kapt("com.google.dagger:hilt-compiler:2.44.2")
+
+    // Picasso
+    implementation("com.squareup.picasso:picasso:2.71828")
+
+    //Preference
+    implementation ("androidx.preference:preference:1.2.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
 }
