@@ -25,4 +25,9 @@
         android:id="@+id/publicationFragment"
         android:name="com.example.parcialtp3.ui.publication.PublicationFragment"
         android:label="PublicationFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.parcialtp3.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

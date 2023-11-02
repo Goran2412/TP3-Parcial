@@ -2,6 +2,7 @@ package com.example.parcialtp3.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -10,16 +11,20 @@ import androidx.core.view.MenuProvider
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "MainActivity"
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -52,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         setupWithNavController(bottomNavigationView,navController).also {
-            setupWithNavController(navView, navController)
+            setupWithNavController(navView,navController)
         }
 
         addMenuProvider(object : MenuProvider {
@@ -69,6 +74,21 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        navView.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.configuration -> {
+                    Log.d(TAG, "configuration!")
+                }
+
+                else -> {
+                    NavigationUI.onNavDestinationSelected(it, navController)
+                    drawerLayout.closeDrawers()
+                }
+            }
+            true
+        }
+
 
         navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, args: Bundle? ->
             if (nd.id == nc.graph.startDestinationId) {
