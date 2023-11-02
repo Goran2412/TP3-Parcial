@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/my_container"
+    android:id="@+id/content_main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -22,15 +22,13 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="74dp"
+        android:layout_height="wrap_content"
         app:itemHorizontalTranslationEnabled="true"
         app:labelVisibilityMode="labeled"
-        app:itemIconTint="#000000"
-        app:itemTextColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_container"
+        app:layout_constraintTop_toBottomOf="@+id/content_main_container"
         app:menu="@menu/bottom_bar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,23 +1,27 @@
-package com.example.parcialtp3
+package com.example.parcialtp3.ui
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuProvider
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import com.example.parcialtp3.R
 import com.example.parcialtp3.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -40,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment), drawerLayout
+            setOf(R.id.homeFragment,R.id.favouritesFragment, R.id.adoptionFragment, R.id.publicationFragment), drawerLayout
         )
 
         val bottomNavigationView = binding.appBarMain.contentMain.bottomBar
@@ -50,6 +54,21 @@ class MainActivity : AppCompatActivity() {
         setupWithNavController(bottomNavigationView,navController).also {
             setupWithNavController(navView, navController)
         }
+
+        addMenuProvider(object : MenuProvider {
+            override fun onPrepareMenu(menu: Menu) {
+            }
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
+
+                android.R.id.home -> navController.navigateUp(appBarConfiguration)
+                else -> true
+            }
+
+        })
 
         navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, args: Bundle? ->
             if (nd.id == nc.graph.startDestinationId) {

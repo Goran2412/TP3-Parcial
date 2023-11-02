@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:alpha="255"
     android:fitsSystemWindows="true"
-    tools:context="MainActivity"
+    tools:context=".ui.MainActivity"
     app:layout_behavior="@string/drawer_layout_behavior"
     tools:openDrawer="start">
 
