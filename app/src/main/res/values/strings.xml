@@ -10,4 +10,6 @@
     <string name="favoritos">Favoritos</string>
     <string name="adopcion">Adopción</string>
     <string name="publicacion">Publicación</string>
+    <string name="generales">Generales</string>
+    <string name="modo_oscuro">Modo oscuro</string>
 </resources>
