@@ -1,9 +1,8 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory app:title="Formato archivo">
-        <CheckBoxPreference
+    <PreferenceCategory app:title="@string/generales">
+        <SwitchPreference
             app:key="attachment"
-            app:title="Modo oscuro"
-            app:summaryOff="Off"
-            app:summaryOn="On" />
+            app:title="@string/modo_oscuro"
+          />
     </PreferenceCategory>
 </PreferenceScreen>
