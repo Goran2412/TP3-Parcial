@@ -7,23 +7,23 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.core.view.MenuProvider
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.databinding.ActivityMainBinding
 import com.example.parcialtp3.ui.settings.SettingsActivity
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+
 
 private const val TAG = "MainActivity"
 
@@ -50,15 +50,20 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment,R.id.favouritesFragment, R.id.adoptionFragment, R.id.publicationFragment), drawerLayout
+            setOf(
+                R.id.homeFragment,
+                R.id.favouritesFragment,
+                R.id.adoptionFragment,
+                R.id.publicationFragment
+            ), drawerLayout
         )
 
         val bottomNavigationView = binding.appBarMain.contentMain.bottomBar
 
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        setupWithNavController(bottomNavigationView,navController).also {
-            setupWithNavController(navView,navController)
+        setupWithNavController(bottomNavigationView, navController).also {
+            setupWithNavController(navView, navController)
         }
 
         addMenuProvider(object : MenuProvider {
@@ -77,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         navView.setNavigationItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.configuration -> {
                     Log.d(TAG, "configuration!")
                     val intent = Intent(this@MainActivity, SettingsActivity::class.java)
@@ -107,5 +112,18 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.drawerLayout.closeDrawers()
+        // Clear the selected item in the navigation drawer
+        val navigationView =
+            binding.navView// Replace 'navigationView' with the actual ID of your navigation view
+        val menu = navigationView.menu
+
+        for (i in 0 until menu.size()) {
+            menu.getItem(i).isChecked = false
+        }
     }
 }
