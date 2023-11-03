@@ -12,29 +12,29 @@ private const val TAG = "SettingsActivity"
 @AndroidEntryPoint
 class SettingsActivity : AppCompatActivity() {
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.settings_activity)
-//
-//        val toolbar: Toolbar = findViewById(R.id.toolbarSettings)
-//        setSupportActionBar(toolbar)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//
-//
-//        if (savedInstanceState == null) {
-//            supportFragmentManager
-//                .beginTransaction()
-//                .replace(R.id.settings, SettingsFragment())
-//                .commit()
-//        }
-//
-//        Log.d(TAG, "onCreate()")
-//    }
-//
-//
-//    override fun onSupportNavigateUp(): Boolean {
-//        onBackPressedDispatcher.onBackPressed()
-//        return true
-//    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.settings_activity)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbarSettings)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.settings, SettingsFragment())
+                .commit()
+        }
+
+        Log.d(TAG, "onCreate()")
+    }
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
 
 }

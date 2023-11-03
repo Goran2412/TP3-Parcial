@@ -21,6 +21,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.databinding.ActivityMainBinding
+import com.example.parcialtp3.ui.settings.SettingsActivity
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -79,6 +80,8 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.configuration -> {
                     Log.d(TAG, "configuration!")
+                    val intent = Intent(this@MainActivity, SettingsActivity::class.java)
+                    startActivity(intent)
                 }
 
                 else -> {
