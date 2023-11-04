@@ -16,7 +16,7 @@
     <style name="Theme.ParcialTP3.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
     <style name="Theme.ParcialTP3.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
-    <style name="RoundedButton" parent="Widget.AppCompat.Button">
+    <style name="SquaredButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/rounded_button</item>
     </style>
 

@@ -32,13 +32,13 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
+        //val textView: TextView = binding.textHome
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        homeViewModel.text.observe(viewLifecycleOwner) {
+/*        homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-        }
+        }*/
         return root
     }
 
