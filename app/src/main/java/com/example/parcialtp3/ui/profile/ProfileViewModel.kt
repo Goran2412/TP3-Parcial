@@ -9,8 +9,11 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor() : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is profile Fragment"
+    private val _text = MutableLiveData<String>()
+
+    fun setUserName(userName: String) {
+        _text.value = userName
     }
+
     val text: LiveData<String> = _text
 }

@@ -16,7 +16,7 @@
         android:layout_height="@dimen/book_size"
         android:contentDescription="Descripción"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/ic_menu_book" />
+        app:srcCompat="@drawable/ic_profile" />
 
     <TextView
         android:layout_width="match_parent"
