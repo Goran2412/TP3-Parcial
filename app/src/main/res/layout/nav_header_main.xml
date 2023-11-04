@@ -4,29 +4,35 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="@dimen/margin_top_nav_header"
-    android:gravity="center_horizontal"
     android:background="@drawable/test"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:paddingTop="@dimen/header_padding_top"
     android:padding="@dimen/nav_header_padding">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/profileImage"
         android:layout_width="@dimen/book_size"
         android:layout_height="@dimen/book_size"
-        android:contentDescription="Descripción"
+        android:contentDescription="Foto de perfil"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@drawable/ic_profile" />
 
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/header_padding_top"
-        android:gravity="center_horizontal"
-        android:textSize="@dimen/text_size"
-        android:text="Header"
-        android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hola"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
 
-
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre de Usuario"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
+    </LinearLayout>
 </LinearLayout>
