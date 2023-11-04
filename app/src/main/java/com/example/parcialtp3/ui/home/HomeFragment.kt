@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.parcialtp3.R
 import com.example.parcialtp3.databinding.FragmentHomeBinding
 //import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +24,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View {
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
@@ -31,6 +33,9 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
+
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
