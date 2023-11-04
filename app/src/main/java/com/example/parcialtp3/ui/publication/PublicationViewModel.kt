@@ -9,8 +9,10 @@ import javax.inject.Inject
 @HiltViewModel
 class PublicationViewModel @Inject constructor() : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is publication Fragment"
+    private val _text = MutableLiveData<String>()
+    //TODO: revisar esto, no encontre como resolverlo de otra forma
+    fun setDogName(DogName: String) {
+        _text.value = DogName
     }
     val text: LiveData<String> = _text
 }

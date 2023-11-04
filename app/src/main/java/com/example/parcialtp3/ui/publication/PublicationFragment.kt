@@ -30,7 +30,7 @@ class PublicationFragment: Fragment() {
         _binding = FragmentPublicationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
+        val textView: TextView = binding.dogName
         adoptionViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }

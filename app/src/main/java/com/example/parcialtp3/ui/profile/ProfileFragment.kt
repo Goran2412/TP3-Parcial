@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -30,10 +32,31 @@ class ProfileFragment: Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
+        val textView: TextView = binding.username
         adoptionViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        // Aquí es donde agregas el OnClickListener a tu botón
+        val uploadButton: Button = binding.uploadButton
+        val imageUrlInput: EditText = binding.imageUrlInput
+
+        uploadButton.setOnClickListener {
+            if (imageUrlInput.visibility == View.GONE) {
+                // El usuario ha tocado "Subir foto", así que mostramos el EditText y cambiamos el texto del botón a "Confirmar"
+                imageUrlInput.visibility = View.VISIBLE
+                uploadButton.text = "Confirmar"
+            } else {
+                // El usuario ha tocado "Confirmar", así que obtenemos la URL de la imagen del EditText y la usamos para actualizar la imagen
+                val imageUrl = imageUrlInput.text.toString()
+                // TODO: Usa imageUrl para actualizar tu imagen
+
+                // Ocultamos el EditText y cambiamos el texto del botón de nuevo a "Subir foto"
+                imageUrlInput.visibility = View.GONE
+                uploadButton.text = "Subir foto"
+            }
+        }
+
         return root
     }
 
@@ -41,4 +64,4 @@ class ProfileFragment: Fragment() {
         super.onDestroyView()
         _binding = null
     }
-} 
+}
