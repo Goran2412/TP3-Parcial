@@ -93,12 +93,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupChip() {
+
         val nameList =
             arrayListOf("Golden", "Salchicha", "Terrier")
         for (name in nameList) {
             val chip = createChip(name)
             binding.chipGroup.addView(chip)
         }
+
     }
     private fun createChip(label: String): Chip {
         val chip = ChipBinding.inflate(layoutInflater).root
