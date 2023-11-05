@@ -18,9 +18,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.databinding.FragmentHomeBinding
-//import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 
-//@AndroidEntryPoint
+
+
+private const val TAG = "HomeListFragment"
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -72,15 +75,14 @@ class HomeFragment : Fragment() {
 
                 val menuItem = menu.findItem(R.id.search)
                 val searchView = menuItem.actionView as SearchView
-                searchView.queryHint = "Buscá por raza o ubicación.."
+                searchView.queryHint = getString(R.string.search_hint)
 
                 searchView.setOnSearchClickListener {
-                    //TODOfindNavController().navigate(R.id.action_homeListFragment_to_searchFragment)
+                    findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
                 }
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                Log.d("MenuHost", "onMenuItemSelected executed")
                 return true
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED).also {

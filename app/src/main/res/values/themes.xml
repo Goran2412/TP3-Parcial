@@ -20,4 +20,17 @@
         <item name="android:background">@drawable/rounded_button</item>
     </style>
 
+    <style name="MaterialTabs" parent="Widget.MaterialComponents.ChipGroup">
+        <item name="android:shape">@style/MaterialTabsShape</item>
+    </style>
+
+    <style name="MaterialTabsShape">
+        <item name="shapeAppearanceOverlay">@style/MaterialTabsShapeOverlay</item>
+    </style>
+
+    <style name="MaterialTabsShapeOverlay" parent="ShapeAppearanceOverlay.MaterialComponents.Chip">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
 </resources>
