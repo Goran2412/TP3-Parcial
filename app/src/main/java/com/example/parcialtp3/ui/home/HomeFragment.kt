@@ -20,11 +20,14 @@ import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.parcialtp3.R
 
 import com.example.parcialtp3.databinding.FragmentHomeBinding
+import com.example.parcialtp3.ui.dogslist.DogsProvider
+import com.example.parcialtp3.ui.dogslist.adapter.DogAdapter
 import dagger.hilt.android.AndroidEntryPoint
-
 
 
 private const val TAG = "HomeFragment"
@@ -42,6 +45,7 @@ class HomeFragment : Fragment() {
 
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        initRecyclerView(binding.root)
         return binding.root
     }
 
@@ -58,7 +62,7 @@ class HomeFragment : Fragment() {
                 }
 
                 is Result.Loading -> {
-                   Log.d(TAG, "loading...")
+                    Log.d(TAG, "loading...")
                 }
 
                 is Result.Error -> {
@@ -69,7 +73,10 @@ class HomeFragment : Fragment() {
             }
         }
         setupMenu()
+
     }
+
+
 
     private fun setupMenu() {
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
@@ -95,4 +102,13 @@ class HomeFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED).also {
         }
     }
+
+    private fun initRecyclerView(view: View) {
+        val rV = view.findViewById<RecyclerView>(R.id.dogs_rv)
+        rV.layoutManager = LinearLayoutManager(this.context)
+        context?.let {
+            rV.adapter = DogAdapter(DogsProvider.mainPageDogs, it)
+        }
+    }
+
 }

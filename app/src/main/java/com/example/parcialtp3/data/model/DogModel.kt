@@ -16,12 +16,12 @@ data class DogModel(
     val location: String,
     val breed: MainBreed,
     val images: List<String>,
-    val adopter: Adopter?,
+    val adopterModel: AdopterModel?,
     val isAdopted: Boolean,
     val observations: String,
  //   val isFavorite: Boolean,
 ) {
-    data class Adopter(
+    data class AdopterModel(
         val name: String,
         val phone: String
     )

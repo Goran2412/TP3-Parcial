@@ -15,5 +15,7 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
         _text.value = userName
     }
 
+
+
     val text: LiveData<String> = _text
 }

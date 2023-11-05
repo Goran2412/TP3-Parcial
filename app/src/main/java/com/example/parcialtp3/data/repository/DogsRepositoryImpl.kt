@@ -6,12 +6,13 @@ import com.example.parcialtp3.domain.model.Dog
 import com.example.parcialtp3.domain.repository.DogsRepository
 import kotlinx.coroutines.flow.Flow
 import com.example.parcialtp3.common.Result
+import com.example.parcialtp3.data.remote.DogsService
+import com.example.parcialtp3.data.response.DogBreedsResponse
 import com.example.parcialtp3.domain.model.toDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-
 
 
 import kotlinx.coroutines.flow.map
@@ -21,7 +22,10 @@ import javax.inject.Inject
 
 private const val TAG = "DogsRepositoryImpl"
 
-class DogsRepositoryImpl @Inject constructor(private val dogDao: DogDao) : DogsRepository {
+class DogsRepositoryImpl @Inject constructor(
+    private val dogDao: DogDao,
+    private val dogsService: DogsService
+) : DogsRepository {
     init {
         Log.d(TAG, "init")
     }
@@ -51,6 +55,15 @@ class DogsRepositoryImpl @Inject constructor(private val dogDao: DogDao) : DogsR
             .catch { e ->
                 emit(Result.Error(e.message ?: "Error in dogs database"))
             }
+    }
+
+    override suspend fun getAllBreeds(): Result<DogBreedsResponse> {
+        return try {
+            val response = dogsService.getBreeds()
+            Result.Success(response)
+        } catch (e: Exception) {
+            Result.Error(e.message.toString())
+        }
     }
 }
 

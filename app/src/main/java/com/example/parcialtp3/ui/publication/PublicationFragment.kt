@@ -1,55 +1,68 @@
 package com.example.parcialtp3.ui.publication
 
-import android.R
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import com.example.parcialtp3.R
+import com.example.parcialtp3.common.Provincias
+import com.example.parcialtp3.common.Result
 import com.example.parcialtp3.databinding.FragmentPublicationBinding
 import dagger.hilt.android.AndroidEntryPoint
-import com.example.parcialtp3.common.Provincias
+
+private const val TAG = "PublicationFragment"
 
 @AndroidEntryPoint
-class PublicationFragment: Fragment() {
+class PublicationFragment : Fragment() {
 
-    private var _binding: FragmentPublicationBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentPublicationBinding
+    private val viewModel: PublicationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val adoptionViewModel =
-            ViewModelProvider(this).get(PublicationViewModel::class.java)
-
-        _binding = FragmentPublicationBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        // Configura el Spinner con los valores del enum
-        val spinnerUbicacion: Spinner = binding.dogLocation
-        val provinciasArray = Provincias.values().map { it.name }.toTypedArray()
-        val adapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item, provinciasArray)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerUbicacion.adapter = adapter
-
-        val textView: TextView = binding.dogName
-        adoptionViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        binding = FragmentPublicationBinding.inflate(inflater, container, false)
+        binding.dogLocation.setAdapter(generateAdapter())
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.getAllBreeds()
+
+        viewModel.breedsListState.observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Success -> {
+                    Log.d(TAG, "result $it")
+                }
+
+                is Result.Error -> {
+                    Log.d(TAG, "HUBO UN ERROR ${it.message}")
+                }
+
+                is Result.Loading -> {
+                    Log.d(TAG, "loading breeds...")
+                }
+            }
+        }
+    }
+
+    private fun generateAdapter(): ArrayAdapter<String> {
+        val enumValues = getFormattedEnumValues(Provincias::class.java)
+        return ArrayAdapter(requireContext(), R.layout.list_type_enum, enumValues)
+    }
+
+    private fun getFormattedEnumValues(enumClass: Class<out Enum<*>>): List<String> {
+        return enumClass.enumConstants.map { it.name.replace("_", " ").split(' ').joinToString(" ") { it.lowercase().titleCaseFirstChar() } }
+    }
+
+    private fun String.titleCaseFirstChar(): String {
+        return replaceFirstChar { it.titlecase() }
     }
 } 

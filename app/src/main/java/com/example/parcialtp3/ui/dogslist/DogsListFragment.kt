@@ -26,7 +26,7 @@ class DogsListFragment : Fragment() {
 
     private fun initRecyclerView(view: View) {
         val rV = view.findViewById<RecyclerView>(R.id.dogs_rv)
-        rV.layoutManager = LinearLayoutManager(activity)
+        rV.layoutManager = LinearLayoutManager(this.context)
         context?.let {
             rV.adapter = DogAdapter(DogsProvider.mainPageDogs, it)
         }

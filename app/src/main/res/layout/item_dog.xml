@@ -2,8 +2,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/elementDogRV"
@@ -11,10 +11,11 @@
         android:layout_height="140dp"
         android:layout_marginStart="84dp"
         android:layout_marginTop="56dp"
-        android:background="@drawable/rounded_background"
         android:contentDescription="Item de la RV"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_adoption"/>
 
     <TextView
         android:id="@+id/dogName"
@@ -23,6 +24,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="68dp"
         android:text="Nombre"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
         app:layout_constraintTop_toTopOf="@id/elementDogRV" />
@@ -32,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:textColor="?attr/colorOnPrimary"
         android:layout_marginTop="120dp"
         android:text="Subraza"
         android:textSize="15sp"
@@ -64,6 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
+        android:textColor="?attr/colorOnPrimary"
         android:text="Raza"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
@@ -76,6 +80,7 @@
         android:layout_marginStart="200dp"
         android:layout_marginTop="116dp"
         android:text="Género"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
         app:layout_constraintTop_toTopOf="@id/elementDogRV" />
@@ -86,6 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="148dp"
         android:layout_marginTop="116dp"
+        android:textColor="?attr/colorOnPrimary"
         android:text="Edad"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"

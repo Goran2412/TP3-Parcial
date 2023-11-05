@@ -42,7 +42,7 @@ class HomeViewModel @Inject constructor(val dogDao: DogDao, private val getAllDo
                 location = "Shelter",
                 breed = MainBreed.AUSTRALIAN,
                 images = listOf("image1.jpg", "image2.jpg"),
-                adopter = DogModel.Adopter("John Doe", "555-555-5555"),
+                adopterModel = DogModel.AdopterModel("John Doe", "555-555-5555"),
                 isAdopted = false,
                 observations = "No known health issues"
             )

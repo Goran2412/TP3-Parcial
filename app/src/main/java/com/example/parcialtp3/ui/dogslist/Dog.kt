@@ -6,5 +6,5 @@ data class Dog (
     val subbreed : String,
     val edad : Int,
     val genero : DogGenders,
-    //Agregar foto
+    val imageLink: String
 )

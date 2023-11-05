@@ -3,9 +3,8 @@ package com.example.parcialtp3.util
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.example.parcialtp3.data.model.MainBreed
-import com.example.parcialtp3.data.model.DogModel.Adopter
+import com.example.parcialtp3.data.model.DogModel.AdopterModel
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 @ProvidedTypeConverter
 class Converters {
@@ -20,13 +19,13 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromAdopter(adopter: Adopter?): String? {
-        return Gson().toJson(adopter)
+    fun fromAdopter(adopterModel: AdopterModel?): String? {
+        return Gson().toJson(adopterModel)
     }
 
     @TypeConverter
-    fun toAdopter(adopterJson: String?): Adopter? {
-        return Gson().fromJson(adopterJson, Adopter::class.java)
+    fun toAdopter(adopterJson: String?): AdopterModel? {
+        return Gson().fromJson(adopterJson, AdopterModel::class.java)
     }
 
     @TypeConverter
