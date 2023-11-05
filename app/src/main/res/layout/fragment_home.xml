@@ -10,61 +10,15 @@
     android:layout_gravity="center"
     tools:context=".ui.home.HomeFragment">
 
-    <EditText
-        android:id="@+id/searchView"
-        android:layout_width="295dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:iconifiedByDefault="false"
-        android:queryHint="Buscar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <Button
-        android:id="@+id/lupaButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        style="@style/SquaredButton"
-        android:background="@drawable/rounded_button"
-        android:drawableLeft="@drawable/ic_lupa"
-        android:drawablePadding="10dp"
-        android:gravity="center"
-        android:paddingLeft="15dp"
-        app:layout_constraintEnd_toEndOf="@id/searchView"
-        app:layout_constraintTop_toTopOf="@id/searchView" />
-
-    <TextView
-        android:id="@+id/filtersLabel"
+        android:id="@+id/salchichaButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="4dp"
-        android:text="Filtros"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView" />
-
-    <TextView
-        android:id="@+id/moreFiltersButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="28dp"
-        android:text="Más Filtros"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView" />
-
-    <Button
-        android:id="@+id/terrierButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="8dp"
-        android:text="Terrier"
-        app:layout_constraintStart_toEndOf="@id/salchichaButton"
+        android:text="Salchicha"
+        app:layout_constraintStart_toEndOf="@id/goldenButton"
         app:layout_constraintTop_toBottomOf="@id/filtersLabel"
         app:singleSelection="true" />
 
@@ -73,22 +27,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="Golden"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filtersLabel"
         app:singleSelection="true" />
 
     <Button
-        android:id="@+id/salchichaButton"
+        android:id="@+id/terrierButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="8dp"
-        android:text="Salchicha"
-        app:layout_constraintStart_toEndOf="@id/goldenButton"
+        android:layout_marginTop="4dp"
+        android:text="Terrier"
+        app:layout_constraintStart_toEndOf="@id/salchichaButton"
         app:layout_constraintTop_toBottomOf="@id/filtersLabel"
         app:singleSelection="true" />
+
+    <TextView
+        android:id="@+id/moreFiltersButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="Más Filtros"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="26dp" />
+
+    <TextView
+        android:id="@+id/filtersLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="Filtros"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="18dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
