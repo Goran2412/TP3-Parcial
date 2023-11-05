@@ -11,6 +11,8 @@ import org.w3c.dom.Text
 
 class DogViewHolder(val view : View) : ViewHolder(view) {
 
+    private val saveIcon: ImageView = itemView.findViewById(R.id.saveIcon)
+
     val dogName = view.findViewById<TextView>(R.id.dogName)
     val dogBreed = view.findViewById<TextView>(R.id.dogBreedName)
     val dogSubBreed = view.findViewById<TextView>(R.id.dogSubBreedName)
@@ -21,8 +23,19 @@ class DogViewHolder(val view : View) : ViewHolder(view) {
         dogName.text = perro.name
         dogBreed.text = perro.breed
         dogSubBreed.text = perro.subbreed
-        dogAge.text = perro.edad.toString()
+        dogAge.text = perro.edad.toString() + " años / "
         dogGender.text = perro.genero.toString()
+
+        var guardado = false
+
+        saveIcon.setOnClickListener {
+            if (guardado) {
+                saveIcon.setImageResource(R.drawable.ic_save)
+            } else {
+                saveIcon.setImageResource(R.drawable.ic_saved)
+            }
+            guardado = !guardado
+        }
 
     }
 

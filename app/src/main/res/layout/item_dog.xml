@@ -21,9 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="68dp"
         android:text="Nombre"
-        android:textSize="14sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
         app:layout_constraintTop_toTopOf="@id/elementDogRV" />
 
@@ -32,9 +32,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="120dp"
         android:text="Subraza"
-        android:textSize="10sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
         app:layout_constraintTop_toTopOf="@id/elementDogRV" />
 
@@ -53,7 +53,7 @@
         android:layout_width="12dp"
         android:layout_height="12dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="104dp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
         app:layout_constraintTop_toTopOf="@id/elementDogRV"
         app:srcCompat="@drawable/ic_paws" />
@@ -63,9 +63,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="100dp"
         android:text="Raza"
-        android:textSize="10sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
         app:layout_constraintTop_toTopOf="@id/elementDogRV" />
 
@@ -73,10 +73,10 @@
         android:id="@+id/dogGenderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="116dp"
         android:text="Género"
-        android:textSize="10sp"
+        android:textSize="13sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
         app:layout_constraintTop_toTopOf="@id/elementDogRV" />
 
@@ -84,10 +84,10 @@
         android:id="@+id/dogAgeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="116dp"
         android:text="Edad"
-        android:textSize="10sp"
+        android:textSize="13sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
         app:layout_constraintTop_toTopOf="@id/elementDogRV" />
 
