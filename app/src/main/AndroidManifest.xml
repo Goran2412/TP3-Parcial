@@ -17,9 +17,9 @@
 
         <activity
             android:name=".ui.settings.SettingsActivity"
-            android:theme="@style/Theme.ParcialTP3.NoActionBar"
             android:exported="false"
-            android:label="@string/configuracion" />
+            android:label="@string/configuracion"
+            android:theme="@style/Theme.ParcialTP3.NoActionBar" />
 
         <activity
             android:name=".ui.MainActivity"
