@@ -13,24 +13,41 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PublicationViewModel @Inject constructor(private val getBreedsFromApiUseCase: GetBreedsFromApiUseCase) : ViewModel() {
+class PublicationViewModel @Inject constructor(private val getBreedsFromApiUseCase: GetBreedsFromApiUseCase) :
+    ViewModel() {
 
     private val _breedsListState = MutableLiveData<Result<DogBreedsResponse>>()
     val breedsListState: LiveData<Result<DogBreedsResponse>> = _breedsListState
 
+    private val _breedsList = MutableLiveData<List<BreedWithSubBreeds>>()
+    val breedsList: LiveData<List<BreedWithSubBreeds>> = _breedsList
 
-    private val _text = MutableLiveData<String>()
-    //TODO: revisar esto, no encontre como resolverlo de otra forma
-    fun setDogName(DogName: String) {
-        _text.value = DogName
+    private val _selectedBreed = MutableLiveData<String>()
+    val selectedBreed: LiveData<String> = _selectedBreed
+
+    fun setSelectedBreed(breed: String) {
+        _selectedBreed.value = breed
     }
 
-    fun getAllBreeds(){
+
+    fun getAllBreeds() {
         _breedsListState.postValue(Result.Loading)
         viewModelScope.launch {
-          val breeds = getBreedsFromApiUseCase()
+            val breeds = getBreedsFromApiUseCase()
             _breedsListState.postValue(breeds)
+            if (breeds is Result.Success) {
+                val breedList = breeds.data.message
+                val breedsWithSubBreeds = breedList.map { (breedName, subBreeds) ->
+                    BreedWithSubBreeds(breedName, subBreeds)
+                }
+                _breedsList.postValue(breedsWithSubBreeds)
+            }
+        }
         }
     }
-    val text: LiveData<String> = _text
-}
+
+
+data class BreedWithSubBreeds(
+    val breedName: String,
+    val subBreeds: List<String>
+)
