@@ -14,13 +14,17 @@
             android:id="@+id/dogBreed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
             android:hint="Raza del perro" />
 
-        <EditText
+        <Spinner
             android:id="@+id/dogSubBreed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:hint="Subraza del perro (si aplica)" />
+
 
         <EditText
             android:id="@+id/dogName"
@@ -33,12 +37,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Edad del perro"
+            android:layout_marginBottom="10dp"
             android:inputType="number" />
 
         <RadioGroup
             android:id="@+id/dogGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <RadioButton
@@ -58,6 +64,7 @@
             android:id="@+id/dogDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Descripción del perro" />
 
         <EditText
@@ -65,48 +72,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Peso del perro"
+            android:layout_marginBottom="20dp"
             android:inputType="numberDecimal" />
 
         <Spinner
             android:id="@+id/dogLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Ubicación del perro" />
 
-        <EditText
-            android:id="@+id/imageUrl1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="URL de la imagen 1"
-            android:inputType="textUri" />
-
-        <EditText
-            android:id="@+id/imageUrl2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="URL de la imagen 2"
-            android:inputType="textUri" />
-
-        <EditText
-            android:id="@+id/imageUrl3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="URL de la imagen 3"
-            android:inputType="textUri" />
-
-        <EditText
-            android:id="@+id/imageUrl4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="URL de la imagen 4"
-            android:inputType="textUri" />
-
-        <EditText
-            android:id="@+id/imageUrl5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="URL de la imagen 5"
-            android:inputType="textUri" />
 
         <Button
             android:id="@+id/buttonPublicar"
