@@ -19,7 +19,7 @@ data class DogModel(
     val adopter: Adopter?,
     val isAdopted: Boolean,
     val observations: String,
-    val isFavorite: Boolean,
+ //   val isFavorite: Boolean,
 ) {
     data class Adopter(
         val name: String,

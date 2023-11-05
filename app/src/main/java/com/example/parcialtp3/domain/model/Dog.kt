@@ -15,6 +15,8 @@ data class Dog(
     val adopter: DogModel.Adopter?,
     val isAdopted: Boolean,
     val observations: String,
-    val isFavorite: Boolean
+   // val isFavorite: Boolean
 )
-fun DogModel.toDomain() = Dog(name,age,gender,description,weight,location,breed,images,adopter,isAdopted,observations,isFavorite)
+fun DogModel.toDomain() = Dog(name,age,gender,description,weight,location,breed,images,adopter,isAdopted,observations
+   //,isFavorite
+)
