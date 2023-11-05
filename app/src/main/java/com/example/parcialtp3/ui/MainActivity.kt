@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment,
                 R.id.favouritesFragment,
                 R.id.adoptionFragment,
-                R.id.publicationFragment
+                R.id.dogs_rv,
             ), drawerLayout
         )
 
