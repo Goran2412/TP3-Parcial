@@ -16,18 +16,27 @@
         android:name="com.example.parcialtp3.ui.favourites.FavouritesFragment"
         android:label="fragment_favourites"
         tools:layout="@layout/fragment_favourites" />
+
     <fragment
         android:id="@+id/adoptionFragment"
         android:name="com.example.parcialtp3.ui.adoption.AdoptionFragment"
         android:label="fragment_adoption"
         tools:layout="@layout/fragment_adoption" />
+
     <fragment
         android:id="@+id/publicationFragment"
         android:name="com.example.parcialtp3.ui.publication.PublicationFragment"
         android:label="PublicationFragment" />
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.parcialtp3.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/dogsCatalogFragment"
+        android:name="com.example.parcialtp3.ui.dogslist.TestFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/dogs_recycler_view" />
 </navigation>
