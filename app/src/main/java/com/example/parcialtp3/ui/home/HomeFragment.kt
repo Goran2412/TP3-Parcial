@@ -17,7 +17,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.parcialtp3.R
+import com.example.parcialtp3.databinding.ChipBinding
 import com.example.parcialtp3.databinding.FragmentHomeBinding
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -57,6 +59,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupMenu()
+        setupChip()
     }
 
     override fun onDestroyView() {
@@ -88,4 +91,20 @@ class HomeFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED).also {
         }
     }
+
+    private fun setupChip() {
+        val nameList =
+            arrayListOf("Golden", "Salchicha", "Terrier")
+        for (name in nameList) {
+            val chip = createChip(name)
+            binding.chipGroup.addView(chip)
+        }
+    }
+    private fun createChip(label: String): Chip {
+        val chip = ChipBinding.inflate(layoutInflater).root
+        chip.text = label
+        return chip
+    }
+
+
 }

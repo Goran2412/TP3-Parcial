@@ -10,7 +10,7 @@
     android:layout_gravity="center"
     tools:context=".ui.home.HomeFragment">
 
-    <com.google.android.material.button.MaterialButton
+<!--    <com.google.android.material.button.MaterialButton
         android:id="@+id/terrierButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         android:text="Salchicha"
         app:layout_constraintStart_toEndOf="@id/goldenButton"
         app:layout_constraintTop_toBottomOf="@id/filtersLabel"
-        app:singleSelection="true" />
+        app:singleSelection="true" />-->
 
 
     <TextView
@@ -65,6 +65,18 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="18dp" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filtersLabel"
+        app:singleSelection="true"
+        app:singleLine="false">
+    </com.google.android.material.chip.ChipGroup>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
