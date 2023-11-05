@@ -9,11 +9,11 @@ import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.dogslist.Dog
 import org.w3c.dom.Text
 
-class DogViewHolder(val view : View) : RecyclerView.ViewHolder(view) {
+class DogViewHolder(val view : View) : ViewHolder(view) {
 
     val dogName = view.findViewById<TextView>(R.id.dogName)
-    val dogBreed = view.findViewById<TextView>(R.id.dogBreed)
-    val dogSubBreed = view.findViewById<TextView>(R.id.dogSubBreed)
+    val dogBreed = view.findViewById<TextView>(R.id.dogBreedName)
+    val dogSubBreed = view.findViewById<TextView>(R.id.dogSubBreedName)
     val dogAge = view.findViewById<TextView>(R.id.dogAgeText)
     val dogGender = view.findViewById<TextView>(R.id.dogGenderText)
 

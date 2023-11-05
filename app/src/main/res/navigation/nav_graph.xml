@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/dogsCatalogFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/dogsCatalogFragment"
-        android:name="com.example.parcialtp3.ui.dogslist.TestFragment"
-        android:label="fragment_profile"
+        android:name="com.example.parcialtp3.ui.dogslist.DogsListFragment"
+        android:label="Perros"
         tools:layout="@layout/dogs_recycler_view" />
 </navigation>
