@@ -24,6 +24,7 @@ import com.example.parcialtp3.R
 import com.example.parcialtp3.databinding.FragmentHomeBinding
 import com.example.parcialtp3.ui.adapter.adapter.DogListAdapter
 import com.example.parcialtp3.ui.adapter.adapter.DogListener
+import com.example.parcialtp3.ui.adapter.adapter.SaveIconListener
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -42,27 +43,23 @@ class HomeFragment : Fragment() {
 
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.recyclerView.adapter = DogListAdapter(DogListener {
-            Log.d(TAG, "click $it")
-        })
+        binding.recyclerView.adapter = DogListAdapter(DogListener { dog, dogId ->
+            Log.d(TAG, "dog${dog.name} id $dogId")
+            //  viewModel.updateDogFavouriteStatus(dogId, !dog.isFavourite)
+        },
+            SaveIconListener { dogId ->
+                Log.d(TAG, "$dogId")
+                viewModel.updateDogFavouriteStatus(dogId)
+            })
 
-//        binding.recyclerView.adapter = BookListAdapter(BookListener {
-//            Log.d(TAG, "click")
-//            findNavController().navigate(
-//                HomeListFragmentDirections.actionHomeListFragmentToBookDetailsFragment(
-//                    it
-//                )
-//            )
-//        })
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
-        //initRecyclerView(binding.root)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-     //   viewModel.testInsert()
+           viewModel.testInsert()
 
         viewModel.dogsListState.observe(viewLifecycleOwner) {
             when (it) {
@@ -70,6 +67,7 @@ class HomeFragment : Fragment() {
                     handleLoading(false)
                     val adapter = binding.recyclerView.adapter as DogListAdapter
                     adapter.submitList(it.data)
+                    Log.d(TAG, "checking favourite ${it.data} ")
                 }
 
                 is Result.Loading -> {
@@ -86,9 +84,7 @@ class HomeFragment : Fragment() {
             }
         }
         setupMenu()
-
     }
-
 
 
     private fun setupMenu() {

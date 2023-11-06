@@ -43,22 +43,6 @@ class PublicationFragment : Fragment() {
         initObservers()
     }
 
-    private fun generateAdapter(): ArrayAdapter<String> {
-        val enumValues = getFormattedEnumValues(Provincias::class.java)
-        return ArrayAdapter(requireContext(), R.layout.list_type_enum, enumValues)
-    }
-
-    private fun getFormattedEnumValues(enumClass: Class<out Enum<*>>): List<String> {
-        return enumClass.enumConstants.map {
-            it.name.replace("_", " ").split(' ')
-                .joinToString(" ") { it.lowercase().titleCaseFirstChar() }
-        }
-    }
-
-    private fun String.titleCaseFirstChar(): String {
-        return replaceFirstChar { it.titlecase() }
-    }
-
     private fun handleLoading(isLoading: Boolean) {
         with(binding) {
             if (isLoading) {
@@ -215,59 +199,6 @@ class PublicationFragment : Fragment() {
                 }
             }
 
-
-            // Validate the rest of the fields
-//            viewModel.validateField(dogName) { isValid ->
-//                if (!isValid) {
-//                    binding.dogNameLayout.error = "El nombre no puede estar vacío"
-//                } else {
-//                    binding.dogNameLayout.error = null
-//                }
-//            }
-//
-//            viewModel.validateField(dogAge) { isValid ->
-//                if (!isValid) {
-//                    binding.dogAgeLayout.error = "La edad no puede estar vacía"
-//                } else {
-//                    binding.dogAgeLayout.error = null
-//                }
-//            }
-//
-//            viewModel.validateField(dogGender) { isValid ->
-//                if (!isValid) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Debes seleccionar un género para el perro",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//
-//            viewModel.validateField(dogDescription) { isValid ->
-//                if (!isValid) {
-//                    binding.dogDescriptionLayout.error = "La descripción no puede estar vacía"
-//                } else {
-//                    binding.dogDescriptionLayout.error = null
-//                }
-//            }
-//
-//            viewModel.validateField(dogWeight) { isValid ->
-//                if (!isValid) {
-//                    binding.dogWeightLayout.error = "El peso no puede estar vacío"
-//                } else {
-//                    binding.dogWeightLayout.error = null
-//                }
-//            }
-//
-//            viewModel.validateField(dogLocation) { isValid ->
-//                if (!isValid) {
-//                    binding.dogLocationLayout.error = "La ubicación no puede estar vacía"
-//                } else {
-//                    binding.dogLocationLayout.error = null
-//                }
-//            }
-
-            // Proceed with form submission only if all fields are valid
             if (binding.dogBreedLayout.visibility != View.VISIBLE ||
                 (viewModel.isBreedValid.value == true
                         && (binding.dogSubBreedLayout.visibility != View.VISIBLE ||
@@ -287,13 +218,29 @@ class PublicationFragment : Fragment() {
                     images = listOf("https://images.dog.ceo/breeds/airedale/n02096051_6799.jpg"), // You can add image paths as needed
                     adopterModel = null, // Set to null if not adopted yet
                     isAdopted = false,
-                    observations = "No special notes"
+                    observations = "No special notes",
+                    isFavourite = false
                 )
 
                 viewModel.insertDog(dog)
-                // Form is valid, proceed with submission
-                // You can move the submission logic here
             }
         }
     }
+
+    private fun generateAdapter(): ArrayAdapter<String> {
+        val enumValues = getFormattedEnumValues(Provincias::class.java)
+        return ArrayAdapter(requireContext(), R.layout.list_type_enum, enumValues)
+    }
+
+    private fun getFormattedEnumValues(enumClass: Class<out Enum<*>>): List<String> {
+        return enumClass.enumConstants.map {
+            it.name.replace("_", " ").split(' ')
+                .joinToString(" ") { it.lowercase().titleCaseFirstChar() }
+        }
+    }
+
+    private fun String.titleCaseFirstChar(): String { //should move to ex package
+        return replaceFirstChar { it.titlecase() }
+    }
+
 }

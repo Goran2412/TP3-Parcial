@@ -1,9 +1,9 @@
 package com.example.parcialtp3.domain.model
 
 import com.example.parcialtp3.data.model.DogModel
-import com.example.parcialtp3.data.model.MainBreed
 
 data class Dog(
+    val id : Int,
     val name: String?,
     val age: Int?,
     val gender: String?,
@@ -16,9 +16,10 @@ data class Dog(
     val adopterModel: DogModel.AdopterModel?,
     val isAdopted: Boolean?,
     val observations: String?,
-   // val isFavorite: Boolean
+    val isFavourite: Boolean
 )
 fun DogModel.toDomain() = Dog(
+    id,
     name,
     age,
     gender,
@@ -30,6 +31,6 @@ fun DogModel.toDomain() = Dog(
     images ?: emptyList(), // Provide a default empty list if images is null
     adopterModel,
     isAdopted,
-    observations
-    //,isFavorite
+    observations,
+    isFavourite
 )

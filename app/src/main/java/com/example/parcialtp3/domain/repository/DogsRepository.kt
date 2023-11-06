@@ -10,4 +10,8 @@ interface DogsRepository {
     fun getAllDogs(): Flow<Result<List<Dog>>>
     suspend fun getAllBreeds(): Result<DogBreedsResponse>
     suspend fun addDog(dog: DogModel): Result<Unit>
+
+//    suspend fun getDogById(dogId: Int): DogModel?
+//
+//    suspend fun updateDog(dog: DogModel)
 }

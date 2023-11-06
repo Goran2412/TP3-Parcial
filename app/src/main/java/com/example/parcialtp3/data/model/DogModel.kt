@@ -20,7 +20,7 @@ data class DogModel(
     val adopterModel: AdopterModel?,
     val isAdopted: Boolean?,
     val observations: String?,
-    // Add any other fields as nullable
+    var isFavourite: Boolean
 ) {
     data class AdopterModel(
         val name: String,

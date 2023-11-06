@@ -1,6 +1,7 @@
 package com.example.parcialtp3.ui.home
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,6 +32,18 @@ class HomeViewModel @Inject constructor(val dogDao: DogDao, private val getAllDo
         }
     }
 
+    fun updateDogFavouriteStatus(dogId: Int) {
+        Log.d(TAG, "updateDog")
+        viewModelScope.launch(Dispatchers.IO) {
+            val dog = dogDao.getDogById(dogId)
+            if (dog != null) {
+                val value = dog.isFavourite
+                dog.isFavourite = !value
+                dogDao.updateDog(dog)
+            }
+        }
+    }
+
     fun testInsert(){
         viewModelScope.launch(Dispatchers.IO) {
             val newDog = DogModel(
@@ -41,11 +54,12 @@ class HomeViewModel @Inject constructor(val dogDao: DogDao, private val getAllDo
                 weight = 15.5,
                 location = "Shelter",
                 breed = "Perrote",
-                images = listOf("image1.jpg", "image2.jpg"),
+                images = listOf("https://images.dog.ceo/breeds/airedale/n02096051_6799.jpg"),
                 adopterModel = DogModel.AdopterModel("John Doe", "555-555-5555"),
                 isAdopted = false,
                 observations = "No known health issues",
-                subbreed = null
+                subbreed = null,
+                isFavourite = false
             )
             dogDao.insert(newDog)
         }
