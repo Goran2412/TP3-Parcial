@@ -41,28 +41,31 @@ class PublicationFragment : Fragment() {
         viewModel.breedsListState.observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Success -> {
+                    handleLoading(false)
                     Log.d(TAG, "result $it")
                 }
 
-                is Result.Error -> {
-                    Log.d(TAG, "HUBO UN ERROR ${it.message}")
-                }
+                is Result.Loading -> handleLoading(true)
+                is Result.Error -> handleLoading(false)
 
-                is Result.Loading -> {
-                    Log.d(TAG, "loading breeds...")
+                else -> {
+                    Unit
                 }
-
-                else -> { Unit}
             }
         }
 
         viewModel.selectedBreed.observe(viewLifecycleOwner) { selectedBreed ->
-            val breedWithSubBreeds = viewModel.breedsList.value?.find { it.breedName == selectedBreed }
+            val breedWithSubBreeds =
+                viewModel.breedsList.value?.find { it.breedName == selectedBreed }
             if (breedWithSubBreeds != null && breedWithSubBreeds.subBreeds.isNotEmpty()) {
                 // If the selected breed has sub-breeds, make dogSubBreedLayout visible
                 binding.dogSubBreedLayout.visibility = View.VISIBLE
                 // Populate dogSubBreed AutoCompleteTextView with sub-breeds
-                val subBreedAdapter = ArrayAdapter(requireContext(), R.layout.list_type_enum, breedWithSubBreeds.subBreeds)
+                val subBreedAdapter = ArrayAdapter(
+                    requireContext(),
+                    R.layout.list_type_enum,
+                    breedWithSubBreeds.subBreeds
+                )
                 binding.dogSubBreed.setAdapter(subBreedAdapter)
             } else {
                 // If no sub-breeds, hide dogSubBreedLayout
@@ -74,9 +77,17 @@ class PublicationFragment : Fragment() {
             val breedNames = breedsWithSubBreeds.map { it.breedName }
             val adapter = ArrayAdapter(requireContext(), R.layout.list_type_enum, breedNames)
             binding.dogBreed.setAdapter(adapter)
+
             binding.dogBreed.setOnItemClickListener { _, _, _, _ ->
                 // When a breed is selected, set it as the selected breed
-                viewModel.setSelectedBreed(binding.dogBreed.text.toString())
+                val selectedBreed = binding.dogBreed.text.toString()
+                viewModel.setSelectedBreed(selectedBreed)
+
+                // Clear the selected sub-breed
+                binding.dogSubBreed.setText(
+                    "",
+                    false
+                ) // Clear the text without triggering the AutoComplete dropdown
             }
         }
     }
@@ -95,5 +106,17 @@ class PublicationFragment : Fragment() {
 
     private fun String.titleCaseFirstChar(): String {
         return replaceFirstChar { it.titlecase() }
+    }
+
+    private fun handleLoading(isLoading: Boolean) {
+        with(binding) {
+            if (isLoading) {
+                progressBarPublication.visibility = View.VISIBLE
+                publicationForm.visibility = View.GONE
+            } else {
+                progressBarPublication.visibility = View.GONE
+                publicationForm.visibility = View.VISIBLE
+            }
+        }
     }
 }

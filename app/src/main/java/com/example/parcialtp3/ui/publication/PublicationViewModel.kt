@@ -38,13 +38,19 @@ class PublicationViewModel @Inject constructor(private val getBreedsFromApiUseCa
             if (breeds is Result.Success) {
                 val breedList = breeds.data.message
                 val breedsWithSubBreeds = breedList.map { (breedName, subBreeds) ->
-                    BreedWithSubBreeds(breedName, subBreeds)
+                    BreedWithSubBreeds(
+                        breedName.titleCaseFirstChar(),
+                        subBreeds.map { it.titleCaseFirstChar() })
                 }
                 _breedsList.postValue(breedsWithSubBreeds)
             }
         }
-        }
     }
+
+    private fun String.titleCaseFirstChar(): String {
+        return replaceFirstChar { it.titlecase() }
+    }
+}
 
 
 data class BreedWithSubBreeds(
