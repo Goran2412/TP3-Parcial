@@ -1,6 +1,9 @@
 package com.example.parcialtp3.ui.home
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -30,8 +33,6 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -46,13 +47,21 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //val textView: TextView = binding.textHome
+        val moreFiltersButton = binding.moreFiltersButton
 
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val text = SpannableString(getString(R.string.more_filters))
 
-/*        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }*/
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                findNavController().navigate(R.id.action_homeFragment_to_filterDialogFragment)
+            }
+        }
+        text.setSpan(clickableSpan, 0, text.length, 0)
+
+        moreFiltersButton.text = text
+
+        moreFiltersButton.movementMethod = LinkMovementMethod.getInstance()
+
         return root
     }
 

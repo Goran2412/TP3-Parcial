@@ -13,5 +13,6 @@
     <string name="generales">Generales</string>
     <string name="modo_oscuro">Modo oscuro</string>
     <string name="search_hint">Buscá por raza o por ubicación</string>
+    <string name="more_filters">Más Filtros</string>
 
 </resources>

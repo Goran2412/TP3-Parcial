@@ -1,0 +1,51 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ordenar"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
+    <CheckBox
+        android:id="@+id/sortByDateCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ordenar por fecha" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filtros por Raza"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
+    <ListView
+        android:id="@+id/breedListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Breed" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filtros por Ubicación"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
+    <ListView
+        android:id="@+id/locationListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aplicar"
+        android:id="@+id/applyFiltersButton"/>
+</LinearLayout>
