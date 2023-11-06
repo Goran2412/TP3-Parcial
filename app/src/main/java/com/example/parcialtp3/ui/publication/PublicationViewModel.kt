@@ -25,6 +25,39 @@ class PublicationViewModel @Inject constructor(private val getBreedsFromApiUseCa
     private val _selectedBreed = MutableLiveData<String>()
     val selectedBreed: LiveData<String> = _selectedBreed
 
+    private val _isFormValid = MutableLiveData<Boolean>()
+    val isFormValid: LiveData<Boolean>
+        get() = _isFormValid
+
+    private val _isBreedValid = MutableLiveData<Boolean>()
+    val isBreedValid: LiveData<Boolean>
+        get() = _isBreedValid
+
+    init {
+        _isFormValid.value = false
+        _isBreedValid.value = false
+    }
+
+    fun validateBreed(breed: String) {
+        _isBreedValid.value = breed.isNotEmpty()
+        validateForm()
+    }
+    private val _isSubBreedValid = MutableLiveData<Boolean>()
+    val isSubBreedValid: LiveData<Boolean>
+        get() = _isSubBreedValid
+
+    // Existing code...
+
+    fun validateSubBreed(subBreed: String) {
+        _isSubBreedValid.value = subBreed.isNotEmpty()
+        validateForm()
+    }
+
+    fun validateForm() {
+        _isFormValid.value = _isBreedValid.value == true /*&& other validation conditions*/
+    }
+
+
     fun setSelectedBreed(breed: String) {
         _selectedBreed.value = breed
     }
