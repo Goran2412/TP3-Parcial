@@ -12,4 +12,9 @@
     <string name="publicacion">Publicación</string>
     <string name="generales">Generales</string>
     <string name="modo_oscuro">Modo oscuro</string>
+
+    <!-- Dog Details -->
+    <string name="owner_title">Dueño</string>
+    <string name="adopt_btn_text">Adoptar</string>
+
 </resources>

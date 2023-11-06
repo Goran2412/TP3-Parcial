@@ -54,7 +54,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment,
                 R.id.favouritesFragment,
                 R.id.adoptionFragment,
-                R.id.publicationFragment
+                R.id.publicationFragment,
+                R.id.detailsFragment
             ), drawerLayout
         )
 
