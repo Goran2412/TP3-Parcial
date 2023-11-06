@@ -59,6 +59,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dog_name_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre del perro">
@@ -72,6 +73,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dog_age_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Edad del perro">
@@ -85,27 +87,36 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <RadioGroup
-            android:id="@+id/dogGender"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dogGenderLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
+            android:hint="Género del perro">
 
-            <RadioButton
-                android:id="@+id/male"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/dogGender"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Macho" />
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/female"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hembra" />
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Macho" />
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hembra" />
+            </RadioGroup>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dog_description_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Descripción del perro">
@@ -120,6 +131,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dog_weight_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Peso del perro">
