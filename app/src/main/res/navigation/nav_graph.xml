@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/favouritesFragment"
         android:name="com.example.parcialtp3.ui.favourites.FavouritesFragment"
-        android:label="fragment_favourites"
+        android:label="@string/mis_favoritos"
         tools:layout="@layout/fragment_favourites" />
 
     <fragment

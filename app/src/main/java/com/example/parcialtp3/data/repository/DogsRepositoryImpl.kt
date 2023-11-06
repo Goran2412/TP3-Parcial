@@ -31,20 +31,6 @@ class DogsRepositoryImpl @Inject constructor(
         Log.d(TAG, "init")
     }
 
-
-//    override suspend fun getAllDogs(): Result<List<Dog>> {
-//        Log.d(TAG, "getAllDogs() implementation")
-//        return try {
-//            val dogModels = dogDao.getAllDogs()
-//            Log.d(TAG, "dogModels : $dogModels")
-//            val dogs = dogModels.map { it.toDomain() }
-//            Log.d (TAG, "dogs : $dogs")
-//            Result.Success(dogs)
-//        } catch (e: Exception) {
-//            Result.Error(e.message ?: "Error in dogs database")
-//        }
-//    }
-
     override fun getAllDogs(): Flow<Result<List<Dog>>> {
         return dogDao.getAllDogs()
             .map { dogModels ->
@@ -57,6 +43,20 @@ class DogsRepositoryImpl @Inject constructor(
                 emit(Result.Error(e.message ?: "Error in dogs database"))
             }
     }
+
+    override fun getFavoriteDogs(): Flow<Result<List<Dog>>> {
+        return dogDao.getFavoriteDogs()
+            .map { dogModels ->
+                val favoriteDogs = dogModels.filter { it.isFavourite }.map { it.toDomain() }
+                Result.Success(favoriteDogs) as Result<List<Dog>>
+            }
+            .onStart { emit(Result.Loading) }
+            .flowOn(Dispatchers.IO)
+            .catch { e ->
+                emit(Result.Error(e.message ?: "Error in fetching favorite dogs"))
+            }
+    }
+
 
     override suspend fun getAllBreeds(): Result<DogBreedsResponse> {
         return try {

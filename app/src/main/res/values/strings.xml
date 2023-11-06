@@ -15,5 +15,6 @@
     <string name="search_hint">Buscá por raza o por ubicación</string>
     <string name="mascotas_en_adopcion">Mascotas en adopción</string>
     <string name="ubicacion_del_perro">Ubicación del perro</string>
+    <string name="mis_favoritos">Mis favoritos</string>
 
 </resources>

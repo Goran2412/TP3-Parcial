@@ -1,16 +1,53 @@
 package com.example.parcialtp3.ui.favourites
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.parcialtp3.common.Result
+import com.example.parcialtp3.data.dao.DogDao
+import com.example.parcialtp3.data.model.DogModel
+import com.example.parcialtp3.domain.model.Dog
+import com.example.parcialtp3.domain.usecase.GetAllDogsUseCase
+import com.example.parcialtp3.domain.usecase.GetFavoriteDogsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class FavouritesViewModel @Inject constructor() : ViewModel() {
+private const val TAG = "FavouritesViewModel"
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is favourites Fragment"
+@HiltViewModel
+class FavouritesViewModel @Inject constructor(
+    val dogDao: DogDao,
+    private val getFavoriteDogsUseCase: GetFavoriteDogsUseCase
+) : ViewModel() {
+
+    private val _dogsListState = MutableLiveData<Result<List<Dog>>>()
+    val dogsListState: LiveData<Result<List<Dog>>> = _dogsListState
+
+    init {
+        Log.d(TAG, "init")
+        viewModelScope.launch {
+            getFavoriteDogsUseCase().collect { result ->
+                _dogsListState.value = result
+            }
+        }
     }
-    val text: LiveData<String> = _text
+
+    fun updateDogFavouriteStatus(dogId: Int) {
+        Log.d(TAG, "updateDog")
+        viewModelScope.launch(Dispatchers.IO) {
+            val dog = dogDao.getDogById(dogId)
+            if (dog != null) {
+                val value = dog.isFavourite
+                dog.isFavourite = !value
+                dogDao.updateDog(dog)
+            }
+        }
+    }
+
 }
+
+

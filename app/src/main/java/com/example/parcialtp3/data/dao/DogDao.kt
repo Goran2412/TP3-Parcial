@@ -25,4 +25,7 @@ interface DogDao {
     // suspend fun getAllDogs(): List<DogModel>
     fun getAllDogs(): Flow<List<DogModel>> //this should be Flow<List<DogModel>>
 
+    @Query("SELECT * FROM dogs WHERE isFavourite = 1")
+    fun getFavoriteDogs(): Flow<List<DogModel>>
+
 }
