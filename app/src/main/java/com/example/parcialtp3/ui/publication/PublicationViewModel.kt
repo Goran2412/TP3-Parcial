@@ -6,17 +6,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.parcialtp3.common.Result
+import com.example.parcialtp3.data.model.DogModel
 import com.example.parcialtp3.data.response.DogBreedsResponse
 import com.example.parcialtp3.domain.model.Dog
+import com.example.parcialtp3.domain.usecase.AddDogToAdoptionListUseCase
 import com.example.parcialtp3.domain.usecase.GetBreedsFromApiUseCase
+import com.example.parcialtp3.ui.publication.components.BreedWithSubBreeds
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 private const val TAG = "PublicationViewModel"
+
 @HiltViewModel
-class PublicationViewModel @Inject constructor(private val getBreedsFromApiUseCase: GetBreedsFromApiUseCase) :
+class PublicationViewModel @Inject constructor(
+    private val getBreedsFromApiUseCase: GetBreedsFromApiUseCase,
+    private val addDogToAdoptionListUseCase: AddDogToAdoptionListUseCase
+) :
     ViewModel() {
 
     private val _breedsListState = MutableLiveData<Result<DogBreedsResponse>>()
@@ -172,10 +180,18 @@ class PublicationViewModel @Inject constructor(private val getBreedsFromApiUseCa
     private fun String.titleCaseFirstChar(): String {
         return replaceFirstChar { it.titlecase() }
     }
+
+    fun insertDog(dog: DogModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = addDogToAdoptionListUseCase(dog)
+            if (result is Result.Success) {
+              Log.d(TAG, "insertedDog")
+            } else if (result is Result.Error) {
+                Log.d(TAG, "error ${result.message}")
+            }
+        }
+    }
+
 }
 
 
-data class BreedWithSubBreeds(
-    val breedName: String,
-    val subBreeds: List<String>
-)

@@ -6,6 +6,7 @@ import com.example.parcialtp3.domain.model.Dog
 import com.example.parcialtp3.domain.repository.DogsRepository
 import kotlinx.coroutines.flow.Flow
 import com.example.parcialtp3.common.Result
+import com.example.parcialtp3.data.model.DogModel
 import com.example.parcialtp3.data.remote.DogsService
 import com.example.parcialtp3.data.response.DogBreedsResponse
 import com.example.parcialtp3.domain.model.toDomain
@@ -61,6 +62,15 @@ class DogsRepositoryImpl @Inject constructor(
         return try {
             val response = dogsService.getBreeds()
             Result.Success(response)
+        } catch (e: Exception) {
+            Result.Error(e.message.toString())
+        }
+    }
+
+    override suspend fun addDog(dog: DogModel): Result<Unit> {
+        return try {
+            dogDao.insert(dog)
+            Result.Success(Unit)
         } catch (e: Exception) {
             Result.Error(e.message.toString())
         }

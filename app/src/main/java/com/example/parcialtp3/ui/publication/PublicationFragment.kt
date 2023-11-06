@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import com.example.parcialtp3.R
 import com.example.parcialtp3.common.Provincias
 import com.example.parcialtp3.common.Result
+import com.example.parcialtp3.data.model.DogModel
 import com.example.parcialtp3.databinding.FragmentPublicationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -274,6 +275,22 @@ class PublicationFragment : Fragment() {
                         ) && viewModel.isFormValid.value == true
             ) {
                 Log.d(TAG, "form is valid")
+                val dog = DogModel(
+                    name = dogName,
+                    age = dogAge.toIntOrNull(),
+                    gender = dogGender,
+                    description = dogDescription,
+                    weight = dogWeight.toDoubleOrNull(),
+                    location = dogLocation,
+                    breed = breed,
+                    subbreed = if (binding.dogSubBreedLayout.visibility == View.VISIBLE) subBreed else null,
+                    images = emptyList(), // You can add image paths as needed
+                    adopterModel = null, // Set to null if not adopted yet
+                    isAdopted = false,
+                    observations = "No special notes"
+                )
+
+                viewModel.insertDog(dog)
                 // Form is valid, proceed with submission
                 // You can move the submission logic here
             }
