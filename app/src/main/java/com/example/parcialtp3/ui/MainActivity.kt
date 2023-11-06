@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.core.view.MenuProvider
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -54,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment,
                 R.id.favouritesFragment,
                 R.id.adoptionFragment,
-                R.id.dogs_rv,
+                R.id.recyclerView,
             ), drawerLayout
         )
 

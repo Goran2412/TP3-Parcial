@@ -1,4 +1,4 @@
-package com.example.parcialtp3.ui.dogslist.services
+package com.example.parcialtp3.ui.adapter.services
 
 data class ImageResponse(
     val estado : String,

@@ -12,21 +12,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.parcialtp3.common.Result
 
-import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.parcialtp3.R
 
 import com.example.parcialtp3.databinding.FragmentHomeBinding
-import com.example.parcialtp3.ui.dogslist.DogsProvider
-import com.example.parcialtp3.ui.dogslist.adapter.DogAdapter
+import com.example.parcialtp3.ui.adapter.adapter.DogListAdapter
+import com.example.parcialtp3.ui.adapter.adapter.DogListener
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -45,27 +42,43 @@ class HomeFragment : Fragment() {
 
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        initRecyclerView(binding.root)
+        binding.recyclerView.adapter = DogListAdapter(DogListener {
+            Log.d(TAG, "click $it")
+        })
+
+//        binding.recyclerView.adapter = BookListAdapter(BookListener {
+//            Log.d(TAG, "click")
+//            findNavController().navigate(
+//                HomeListFragmentDirections.actionHomeListFragmentToBookDetailsFragment(
+//                    it
+//                )
+//            )
+//        })
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
+        //initRecyclerView(binding.root)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.testInsert()
+     //   viewModel.testInsert()
 
         viewModel.dogsListState.observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Success -> {
-                    Log.d(TAG, "success!")
-                    Log.d(TAG, "${it.data}")
+                    handleLoading(false)
+                    val adapter = binding.recyclerView.adapter as DogListAdapter
+                    adapter.submitList(it.data)
                 }
 
                 is Result.Loading -> {
+                    handleLoading(true)
                     Log.d(TAG, "loading...")
                 }
 
                 is Result.Error -> {
+                    handleLoading(false)
                     Log.d(TAG, "error! ${it.message}")
                 }
 
@@ -99,15 +112,16 @@ class HomeFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return true
             }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED).also {
-        }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun initRecyclerView(view: View) {
-        val rV = view.findViewById<RecyclerView>(R.id.dogs_rv)
-        rV.layoutManager = LinearLayoutManager(this.context)
-        context?.let {
-            rV.adapter = DogAdapter(DogsProvider.mainPageDogs, it)
+    private fun handleLoading(isLoading: Boolean) {
+        with(binding) {
+            if (isLoading) {
+                progressBarHome.visibility = View.VISIBLE
+            } else {
+                progressBarHome.visibility = View.GONE
+            }
         }
     }
 

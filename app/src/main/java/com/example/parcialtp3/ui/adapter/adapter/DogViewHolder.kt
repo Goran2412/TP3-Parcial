@@ -1,14 +1,12 @@
-package com.example.parcialtp3.ui.dogslist.adapter
+package com.example.parcialtp3.ui.adapter.adapter
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
 import com.example.parcialtp3.R
-import com.example.parcialtp3.ui.dogslist.Dog
-import org.w3c.dom.Text
+import com.example.parcialtp3.ui.adapter.Dog
 
 class DogViewHolder(val view : View) : ViewHolder(view) {
 

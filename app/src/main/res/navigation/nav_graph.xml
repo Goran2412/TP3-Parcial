@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/dogsCatalogFragment"
-        android:name="com.example.parcialtp3.ui.dogslist.DogsListFragment"
+        android:name="com.example.parcialtp3.ui.adapter.DogsListFragment"
         android:label="Perros"
         tools:layout="@layout/dogs_recycler_view" />
 

@@ -284,7 +284,7 @@ class PublicationFragment : Fragment() {
                     location = dogLocation,
                     breed = breed,
                     subbreed = if (binding.dogSubBreedLayout.visibility == View.VISIBLE) subBreed else null,
-                    images = emptyList(), // You can add image paths as needed
+                    images = listOf("https://images.dog.ceo/breeds/airedale/n02096051_6799.jpg"), // You can add image paths as needed
                     adopterModel = null, // Set to null if not adopted yet
                     isAdopted = false,
                     observations = "No special notes"

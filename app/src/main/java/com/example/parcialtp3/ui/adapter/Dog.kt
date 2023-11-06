@@ -1,4 +1,4 @@
-package com.example.parcialtp3.ui.dogslist
+package com.example.parcialtp3.ui.adapter
 
 data class Dog (
     val name : String,
