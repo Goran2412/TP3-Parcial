@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import com.example.parcialtp3.common.Result
 import com.example.parcialtp3.data.remote.DogsService
 import com.example.parcialtp3.data.response.DogBreedsResponse
+import com.example.parcialtp3.data.response.DogImagesResponse
 import com.example.parcialtp3.domain.model.toDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -65,6 +66,16 @@ class DogsRepositoryImpl @Inject constructor(
             Result.Error(e.message.toString())
         }
     }
+
+    override suspend fun getRandomImages(breed: String, count: Int): Result<DogImagesResponse> {
+        return try {
+            val response = dogsService.getRandomImages(breed, count)
+            Result.Success(response)
+        } catch (e: Exception) {
+            Result.Error(e.message.toString())
+        }
+    }
+
 }
 
 //    override fun getAllDogs(): Flow<List<Dog>> {
