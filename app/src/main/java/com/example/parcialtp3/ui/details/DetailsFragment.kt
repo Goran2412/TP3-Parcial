@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -87,10 +88,10 @@ class DetailsFragment : Fragment() {
 
         val adoptButton = view.findViewById<Button>(R.id.adoptButton)
         adoptButton.setOnClickListener {
-            adoptDog()
+            viewModel.adoptDog()
+            findNavController().navigateUp()
         }
 
-        viewModel.showDog()
     }
 
     override fun onDestroyView() {
@@ -109,10 +110,12 @@ class DetailsFragment : Fragment() {
     }
 
     private fun adoptDog() {
-        val message = "TO DO: Adopcion del perro."
-        val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
-        toast.show()
-    }
+//        val message = "TO DO: Adopcion del perro."
+//        val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
+//        toast.show()
+
+        }
+
 
     private fun getData() {
 
@@ -122,23 +125,24 @@ class DetailsFragment : Fragment() {
             .load(ownerImageUrl)
             .into(dogOwnerImage)
 
-        dogImages = listOf(DogImage("https://images.dog.ceo/breeds/labrador/n02099712_7411.jpg"),
-            DogImage("https://images.dog.ceo/breeds/labrador/n02099712_4428.jpg"),
-            DogImage("https://images.dog.ceo/breeds/labrador/n02099712_2228.jpg"),
-            DogImage("https://images.dog.ceo/breeds/labrador/n02099712_490.jpg"),
-            DogImage("https://images.dog.ceo/breeds/labrador/n02099712_3502.jpg"))
+        val dogImageUrls = viewModel.dog.images ?: emptyList()
+        dogImages = dogImageUrls.map { DogImage(it) }
 
-        //Dog Details
-        dogNameText?.text = "Fido"
-        locationText?.text = "Buenos Aires"
-        dogAgeText?.text = "7"
-        dogGenreText?.text = "Macho"
-        if (dogGenreText != null && dogGenreText.text.toString() == "Macho") {
-            dogGenreIcon?.setImageResource(R.drawable.ic_male)
+
+        dogNameText.text = viewModel.dog.name ?: "Unknown"
+        locationText.text = viewModel.dog.location ?: "Unknown"
+        dogAgeText.text = viewModel.dog.age?.toString() ?: "Unknown"
+        dogGenreText.text = viewModel.dog.gender ?: "Unknown"
+
+        if (viewModel.dog.gender == "Macho") {
+            dogGenreIcon.setImageResource(R.drawable.ic_male)
         } else {
-            dogGenreIcon?.setImageResource(R.drawable.ic_female)
+            dogGenreIcon.setImageResource(R.drawable.ic_female)
         }
-        dogWeightText?.text = "24kg"
+
+        dogWeightText.text = viewModel.dog.weight?.toString() ?: "Unknown"
+        dogDescriptionText.text = viewModel.dog.description ?: "No description available"
+
         dogDescriptionText?.text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque laudantium iste accusantium id asperiores assumenda labore minima aut ut at ducimus, possimus, dolores tempore amet magni mollitia autem blanditiis nulla asperiores assumenda labore minima aut ut at ducimus"
 
         //Owner Details

@@ -28,4 +28,7 @@ interface DogDao {
     @Query("SELECT * FROM dogs WHERE isFavourite = 1")
     fun getFavoriteDogs(): Flow<List<DogModel>>
 
+    @Query("UPDATE dogs SET isAdopted = 1, isFavourite = 0 WHERE id = :dogId")
+    suspend fun adoptDog(dogId: Int)
+
 }
