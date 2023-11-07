@@ -25,6 +25,7 @@ class PublicationFragment : Fragment() {
 
     private lateinit var binding: FragmentPublicationBinding
     private val viewModel: PublicationViewModel by viewModels()
+    private lateinit var imageUrls: List<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -128,22 +129,13 @@ class PublicationFragment : Fragment() {
             }
         }
 
+        //guarda las imagenes acordes a la raza en "imageUrls"
         viewModel.randomImages.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Success -> {
                     // Aquí tienes acceso a la lista de URLs de las imágenes
-                    val imageUrls = result.data?.message
+                    imageUrls = result.data.message
                     Log.d(TAG, "Imágenes obtenidas: $imageUrls")
-
-                    // Limpia el LinearLayout antes de agregar las nuevas vistas
-                    binding.imageUrlsLayout.removeAllViews()
-
-                    // Crea un TextView para cada URL y lo agrega al LinearLayout
-                    imageUrls?.forEach { imageUrl ->
-                        val textView = TextView(context)
-                        textView.text = imageUrl
-                        binding.imageUrlsLayout.addView(textView)
-                    }
                 }
                 is Result.Error -> {
                     // Manejar el error aquí
@@ -263,7 +255,7 @@ class PublicationFragment : Fragment() {
                     location = dogLocation,
                     breed = breed,
                     subbreed = if (binding.dogSubBreedLayout.visibility == View.VISIBLE) subBreed else null,
-                    images = listOf("https://images.dog.ceo/breeds/airedale/n02096051_6799.jpg"), // You can add image paths as needed
+                    images = imageUrls,
                     adopterModel = null, // Set to null if not adopted yet
                     isAdopted = false,
                     observations = "No special notes",
