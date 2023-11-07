@@ -7,7 +7,6 @@ import javax.inject.Inject
 
 class AddDogToAdoptionListUseCase @Inject constructor(private val dogsRepository: DogsRepository) {
     suspend operator fun invoke(dog: DogModel): Result<Unit> {
-        // You can do any additional validation or processing here
         return dogsRepository.addDog(dog)
     }
 }

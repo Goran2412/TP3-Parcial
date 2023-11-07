@@ -38,7 +38,7 @@ class AdoptionFragment : Fragment() {
         binding = FragmentAdoptionBinding.inflate(inflater, container, false)
         binding.recyclerView.adapter = DogListAdapter(DogListener { dog, dogId ->
             Log.d(TAG, "dog${dog.name} id $dogId")
-            //  viewModel.updateDogFavouriteStatus(dogId, !dog.isFavourite)
+
         },
             SaveIconListener {
             }, showSaveIcon = false

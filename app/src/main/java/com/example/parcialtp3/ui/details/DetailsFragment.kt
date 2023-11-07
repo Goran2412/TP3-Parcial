@@ -53,7 +53,7 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_details, container, false)
     }
 
@@ -114,20 +114,20 @@ class DetailsFragment : Fragment() {
     }
 
     private fun adoptDog() {
-//        val message = "TO DO: Adopcion del perro."
-//        val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
-//        toast.show()
+
+
+
 
         }
 
 
     private fun getData() {
 
-        //Images
-//        val ownerImageUrl = "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais"
-//        Picasso.get()
-//            .load(ownerImageUrl)
-//            .into(dogOwnerImage)
+
+
+
+
+
 
         val detailSharedPreferences = requireActivity().getSharedPreferences("ProfilePreferences", Context.MODE_PRIVATE)
         val imageUrl = detailSharedPreferences.getString("ProfileImage", null)
@@ -151,7 +151,7 @@ class DetailsFragment : Fragment() {
         dogAgeText.text = viewModel.dog.age?.toString() ?: "Unknown"
         dogGenreText.text = viewModel.dog.gender ?: "Unknown"
 
-        if (viewModel.dog.gender == "Macho") {
+        if (viewModel.dog.gender == "Male") {
             dogGenreIcon.setImageResource(R.drawable.ic_male)
         } else {
             dogGenreIcon.setImageResource(R.drawable.ic_female)
@@ -160,7 +160,7 @@ class DetailsFragment : Fragment() {
         dogWeightText.text = viewModel.dog.weight?.toString() ?: "Unknown"
         dogDescriptionText.text = viewModel.dog.description ?: "No description available"
 
-        //Owner Details
+
         dogOwnerName?.text = viewModel.dog.adopterModel?.name ?: "Unknown"
         dogOwnerPhoneNumber = viewModel.dog.adopterModel?.phone.toString()
     }

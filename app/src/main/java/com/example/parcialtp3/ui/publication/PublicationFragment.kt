@@ -77,18 +77,18 @@ class PublicationFragment : Fragment() {
         }
 
         viewModel.selectedBreed.observe(viewLifecycleOwner) { selectedBreed ->
-            // Cuando se selecciona una raza, obtén las imágenes aleatorias para esa raza
+
             viewModel.getRandomImages(selectedBreed)
 
             val breedWithSubBreeds = viewModel.breedsList.value?.find { it.breedName == selectedBreed }
             if (breedWithSubBreeds != null && breedWithSubBreeds.subBreeds.isNotEmpty()) {
-                // If the selected breed has sub-breeds, make dogSubBreedLayout visible
+
                 binding.dogSubBreedLayout.visibility = View.VISIBLE
-                // Populate dogSubBreed AutoCompleteTextView with sub-breeds
+
                 val subBreedAdapter = ArrayAdapter(requireContext(), R.layout.list_type_enum, breedWithSubBreeds.subBreeds)
                 binding.dogSubBreed.setAdapter(subBreedAdapter)
             } else {
-                // If no sub-breeds, hide dogSubBreedLayout
+
                 binding.dogSubBreedLayout.visibility = View.GONE
             }
         }
@@ -97,9 +97,9 @@ class PublicationFragment : Fragment() {
             val breedWithSubBreeds = viewModel.breedsList.value?.find { it.breedName == selectedBreed }
 
             if (breedWithSubBreeds != null && breedWithSubBreeds.subBreeds.isNotEmpty()) {
-                // If the selected breed has sub-breeds, make dogSubBreedLayout visible
+
                 binding.dogSubBreedLayout.visibility = View.VISIBLE
-                // Populate dogSubBreed AutoCompleteTextView with sub-breeds
+
                 val subBreedAdapter = ArrayAdapter(
                     requireContext(),
                     R.layout.list_type_enum,
@@ -107,7 +107,7 @@ class PublicationFragment : Fragment() {
                 )
                 binding.dogSubBreed.setAdapter(subBreedAdapter)
             } else {
-                // If no sub-breeds, hide dogSubBreedLayout
+
                 binding.dogSubBreedLayout.visibility = View.GONE
             }
         }
@@ -118,32 +118,32 @@ class PublicationFragment : Fragment() {
             binding.dogBreed.setAdapter(adapter)
 
             binding.dogBreed.setOnItemClickListener { _, _, _, _ ->
-                // When a breed is selected, set it as the selected breed
+
                 val selectedBreed = binding.dogBreed.text.toString()
                 viewModel.setSelectedBreed(selectedBreed)
 
-                // Clear the selected sub-breed
+
                 binding.dogSubBreed.setText(
                     "",
                     false
-                ) // Clear the text without triggering the AutoComplete dropdown
+                )
             }
         }
 
-        //guarda las imagenes acordes a la raza en "imageUrls"
+
         viewModel.randomImages.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Success -> {
-                    // Aquí tienes acceso a la lista de URLs de las imágenes
+
                     imageUrls = result.data.message
                     Log.d(TAG, "Imágenes obtenidas: $imageUrls")
                 }
                 is Result.Error -> {
-                    // Manejar el error aquí
+
                     Log.d(TAG, "Error al obtener imágenes: ${result.message}")
                 }
                 is Result.Loading -> {
-                    // Manejar el estado de carga aquí si es necesario
+
                     Log.d(TAG, "Cargando imágenes...")
                 }
                 else -> { Unit }
@@ -166,7 +166,7 @@ class PublicationFragment : Fragment() {
             val dogWeight = binding.dogWeight.text.toString()
             val dogLocation = binding.dogLocation.text.toString()
 
-            // Check if breed layout is visible and validate the breed
+
             if (binding.dogBreedLayout.visibility == View.VISIBLE) {
                 viewModel.validateBreed(breed)
 
@@ -179,7 +179,7 @@ class PublicationFragment : Fragment() {
                 }
             }
 
-            // Check if sub-breed layout is visible and validate the sub-breed
+
             if (binding.dogSubBreedLayout.visibility == View.VISIBLE) {
                 viewModel.validateSubBreed(subBreed)
 
@@ -257,7 +257,7 @@ class PublicationFragment : Fragment() {
                     breed = breed,
                     subbreed = subBreed,
                     images = imageUrls,
-                    adopterModel = null, // Set to null if not adopted yet
+                    adopterModel = null,
                     isAdopted = false,
                     observations = "No special notes",
                     isFavourite = false
@@ -282,7 +282,7 @@ class PublicationFragment : Fragment() {
         }
     }
 
-    private fun String.titleCaseFirstChar(): String { //should move to ex package
+    private fun String.titleCaseFirstChar(): String {
         return replaceFirstChar { it.titlecase() }
     }
 

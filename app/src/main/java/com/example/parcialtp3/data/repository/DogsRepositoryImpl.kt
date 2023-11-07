@@ -99,40 +99,52 @@ class DogsRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getDogsByBreed(breed: String): Flow<Result<List<Dog>>> {
+        return dogDao.getDogsByBreed(breed)
+            .map { dogModels ->
+                val dogs = dogModels.map { it.toDomain() }
+                Result.Success(dogs) as Result<List<Dog>>
+            }
+            .onStart { emit(Result.Loading) }
+            .flowOn(Dispatchers.IO)
+            .catch { e ->
+                emit(Result.Error(e.message ?: "Error in dogs database"))
+            }
+    }
 }
 
-//    override fun getAllDogs(): Flow<List<Dog>> {
-//        return dogDao.getAllDogs().map { dogModels ->
-//            dogModels.map { dogModel ->
-//                Dog(
-//                    id = dogModel.id,
-//                    name = dogModel.name,
-//                    breed = dogModel.breed
-//                )
-//            }
-//        }
-//    }
 
-//    override suspend fun getAllDogs(): Result<List<Dog>> {
-//        return try {
-//            val dogModels = dogDao.getAllDogs().toList() // Collect the flow into a list
-//            // If the query was successful, map the data to domain objects and return a Success result
-//            val dogs = dogModels.flatMap { it } // Flatten the list of lists
-//            Result.Success(dogs.map { it.toDomain() })
-//        } catch (e: Exception) {
-//            // If an error occurred, return an Error result with the error message
-//            Result.Error(e.message ?: "An error occurred")
-//        }
-//    }override fun getAllDogs(): Flow<List<Dog>> {
-//        return dogDao.getAllDogs().map { dogModels ->
-//            dogModels.map { dogModel ->
-//                Dog(
-//                    id = dogModel.id,
-//                    name = dogModel.name,
-//                    breed = dogModel.breed
-//                )
-//            }
-//        }
-//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

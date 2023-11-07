@@ -45,7 +45,6 @@ class FavouritesFragment : Fragment() {
         binding = FragmentFavouritesBinding.inflate(inflater, container, false)
         binding.recyclerView.adapter = DogListAdapter(DogListener { dog, dogId ->
             Log.d(TAG, "dog${dog.name} id $dogId")
-            //  viewModel.updateDogFavouriteStatus(dogId, !dog.isFavourite)
         },
             SaveIconListener { dogId ->
                 Log.d(TAG, "$dogId")

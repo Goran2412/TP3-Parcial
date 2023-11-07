@@ -92,8 +92,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
+<<<<<<< HEAD
                             <option name="x" value="-215" />
                             <option name="y" value="107" />
+=======
+                            <option name="x" value="30" />
+                            <option name="y" value="44" />
+>>>>>>> eaq/feature/search_logic
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -149,29 +154,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="500" />
-                            <option name="y" value="368" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_searchFragment_to_searchResultListFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="searchResultListFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="744" />
-                            <option name="y" value="368" />
+                            <option name="x" value="429" />
+                            <option name="y" value="701" />
                           </Point>
                         </option>
                       </LayoutPositions>

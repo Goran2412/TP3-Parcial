@@ -15,7 +15,7 @@ class Converters {
 
     @TypeConverter
     fun toMainBreed(breedName: String): MainBreed {
-        return MainBreed.fromString(breedName) // Implement a function to get MainBreed from the name
+        return MainBreed.fromString(breedName)
     }
 
     @TypeConverter

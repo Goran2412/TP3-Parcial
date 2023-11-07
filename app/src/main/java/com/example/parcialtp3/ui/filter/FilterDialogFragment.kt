@@ -2,7 +2,6 @@ package com.example.parcialtp3.ui.filter
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,8 +50,6 @@ class FilterDialogFragment : DialogFragment() {
             val selectedBreeds = getSelectedItems(breedListView)
             val selectedLocations = getSelectedItems(locationListView)
 
-            viewModel.applyFilters(selectedBreeds, selectedLocations)
-
             val sortByDate = sortByDateCheckBox.isChecked
             if (sortByDate) {
             }
@@ -66,14 +63,14 @@ class FilterDialogFragment : DialogFragment() {
     }
 
     private fun fetchBreeds() {
-        viewModel.getDistinctBreedsAndSubbreeds().observe(viewLifecycleOwner) { (breeds, subbreeds) ->
+        viewModel.getDistinctBreeds().observe(viewLifecycleOwner) { (breeds, subbreeds) ->
             breedList.clear()
             val sharedPrefs = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             val list = breeds.map { breed ->
                 val category = "Breed"
                 val item = CategorizedItem(category, breed)
                 val key = "${category}_${breed}"
-                item.isChecked = sharedPrefs.getBoolean(key, false) // Restore checkbox state
+                item.isChecked = sharedPrefs.getBoolean(key, false)
                 item
             }
             breedList.addAll(list)
@@ -91,7 +88,7 @@ class FilterDialogFragment : DialogFragment() {
                 val category = "Location"
                 val item = CategorizedItem(category, location)
                 val key = "${category}_${location}"
-                item.isChecked = sharedPrefs.getBoolean(key, false) // Restore checkbox state
+                item.isChecked = sharedPrefs.getBoolean(key, false)
                 item
             }
             locationList.addAll(list)

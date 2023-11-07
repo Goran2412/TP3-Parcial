@@ -23,12 +23,12 @@ class LandingPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // oculta la appbar
+
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
         val roundButton: Button = view.findViewById(R.id.roundButton)
 
-        //para viajar al homeFragment al apretar el boton
+
         roundButton.setOnClickListener {
             findNavController().navigate(LandingPageFragmentDirections.actionLandingPageFragmentToHomeFragment())
         }
@@ -67,6 +67,6 @@ class LandingPageFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        (requireActivity() as AppCompatActivity).supportActionBar?.show() // sino no se vuelve a mostrar la appbar al salir del fragment
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
     }
 }
