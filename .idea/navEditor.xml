@@ -37,18 +37,6 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="23" />
-                            <option name="y" value="652" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="favouritesFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
                             <option name="x" value="415" />
                             <option name="y" value="323" />
                           </Point>
@@ -84,6 +72,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_homeFragment_to_filterDialogFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_homeFragment_to_searchFragment">
                               <value>
                                 <LayoutPositions />
@@ -94,7 +87,7 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="landi">
+                  <entry key="landingPageFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">

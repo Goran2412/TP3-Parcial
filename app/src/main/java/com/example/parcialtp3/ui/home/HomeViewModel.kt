@@ -47,13 +47,13 @@ class HomeViewModel @Inject constructor(val dogDao: DogDao, private val getAllDo
     fun testInsert(){
         viewModelScope.launch(Dispatchers.IO) {
             val newDog = DogModel(
-                name = "Perrito",
+                name = "Israel",
                 age = 3,
                 gender = "Male",
                 description = "Friendly and playful",
                 weight = 15.5,
-                location = "Shelter",
-                breed = "Perrote",
+                location = "Entre Rios",
+                breed = "Beagle",
                 images = listOf("https://images.dog.ceo/breeds/airedale/n02096051_6799.jpg"),
                 adopterModel = DogModel.AdopterModel("John Doe", "555-555-5555"),
                 isAdopted = false,

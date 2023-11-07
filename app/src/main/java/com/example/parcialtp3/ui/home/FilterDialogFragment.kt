@@ -10,15 +10,89 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ListView
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import com.example.parcialtp3.R
+import com.example.parcialtp3.data.database.DogDatabase
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
+@AndroidEntryPoint
 
 class FilterDialogFragment : DialogFragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
+    private val viewModel: FilterDialogViewModel by viewModels()
+
+    private lateinit var breedAdapter: CheckboxListAdapter
+    private lateinit var locationAdapter: CheckboxListAdapter
+    private val breedList = mutableListOf<String>()
+    private val locationList = mutableListOf<String>()
+    private lateinit var breedListView: ListView
+    private lateinit var locationListView: ListView
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_filter_dialog, container, false)
+
+        breedListView = view.findViewById<ListView>(R.id.breedListView)
+        locationListView = view.findViewById<ListView>(R.id.locationListView)
+
+        breedAdapter = CheckboxListAdapter(requireContext(), breedList)
+        locationAdapter = CheckboxListAdapter(requireContext(), locationList)
+
+        breedListView.adapter = breedAdapter
+        locationListView.adapter = locationAdapter
+
+        val applyFiltersButton = view.findViewById<Button>(R.id.applyFiltersButton)
+        val sortByDateCheckBox = view.findViewById<CheckBox>(R.id.sortByDateCheckBox)
+
+        applyFiltersButton.setOnClickListener {
+            val selectedBreeds = getSelectedItems(breedListView)
+            val selectedLocations = getSelectedItems(locationListView)
+
+            viewModel.applyFilters(selectedBreeds, selectedLocations)
+
+            val sortByDate = sortByDateCheckBox.isChecked
+            if (sortByDate) {
+                // Perform sorting logic
+            }
+            dismiss()
+        }
+
+        // Move the fetchBreeds and fetchLocations calls to onViewCreated
+        fetchBreeds()
+        fetchLocations()
+
+        return view
     }
-    //getSelectedItems y applyFilters se utiliza más abajo.
-    fun getSelectedItems(listView: ListView): List<String> {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun fetchBreeds() {
+        viewModel.getDistinctBreedsAndSubbreeds().observe(viewLifecycleOwner) { (breeds, subbreeds) ->
+            breedList.clear()
+            breedList.addAll(breeds)
+            breedAdapter = CheckboxListAdapter(requireContext(), breedList)
+            breedListView.adapter = breedAdapter
+            breedAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun fetchLocations() {
+        viewModel.getDistinctLocations().observe(viewLifecycleOwner) { locations ->
+            locationList.clear()
+            locationList.addAll(locations)
+            locationAdapter = CheckboxListAdapter(requireContext(), locationList)
+            locationListView.adapter = locationAdapter
+            locationAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun getSelectedItems(listView: ListView): List<String> {
         val selectedItems = mutableListOf<String>()
         val checkedItemPositions = listView.checkedItemPositions
         for (i in 0 until checkedItemPositions.size()) {
@@ -30,77 +104,4 @@ class FilterDialogFragment : DialogFragment() {
         }
         return selectedItems
     }
-
-    fun applyFilters(selectedBreeds: List<String>, selectedLocations: List<String>) {
-        // Implementa la lógica de filtrado aquí
-    }
-
-    // datos hardcodeados para probar
-    val breedList = listOf("Caniche", "Perro batata")
-
-    // datos hardcodeados para probar
-    val locationList = listOf("Córdoba", "Tucumán")
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_filter_dialog, container, false)
-
-/*
-        //referencias a los ListViews
-        val breedListView = view.findViewById<ListView>(R.id.breedListView)
-        val locationListView = view.findViewById<ListView>(R.id.locationListView)
-
-        //adaptadores para las listas
-        val breedAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_multiple_choice, breedList)
-        val locationAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_multiple_choice, locationList)
-*/
-        val breedListView = view.findViewById<ListView>(R.id.breedListView)
-        val locationListView = view.findViewById<ListView>(R.id.locationListView)
-
-        val breedAdapter = CheckboxListAdapter(requireContext(), breedList)
-        val locationAdapter = CheckboxListAdapter(requireContext(), locationList)
-
-        breedListView.adapter = breedAdapter
-        locationListView.adapter = locationAdapter
-
-
-        // adaptadores asignados a los ListViews
-        breedListView.adapter = breedAdapter
-        locationListView.adapter = locationAdapter
-
-
-
-
-        val applyFiltersButton = view.findViewById<Button>(R.id.applyFiltersButton)
-        val sortByDateCheckBox = view.findViewById<CheckBox>(R.id.sortByDateCheckBox)
-
-
-        applyFiltersButton.setOnClickListener {
-            // Obtener las selecciones de los checkboxes
-            val selectedBreeds = getSelectedItems(breedListView)
-            val selectedLocations = getSelectedItems(locationListView)
-
-            // Aplicar filtros en función de las selecciones
-            applyFilters(selectedBreeds, selectedLocations)
-
-            val sortByDate = sortByDateCheckBox.isChecked
-            if (sortByDate) {
-                // Apply sort by date
-                // Implement your sort by date logic here
-            }
-            // Close the filter dialog
-            dismiss()
-        }
-
-
-
-
-
-
-
-        return view
-    }
-
 }
