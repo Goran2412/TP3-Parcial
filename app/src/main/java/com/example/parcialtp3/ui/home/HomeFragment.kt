@@ -56,7 +56,6 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.recyclerView.adapter = DogListAdapter(DogListener { dog, dogId ->
             Log.d(TAG, "dog${dog.name} id $dogId")
-            //  viewModel.updateDogFavouriteStatus(dogId, !dog.isFavourite)
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(dog))
         },
             SaveIconListener { dogId ->
@@ -84,15 +83,12 @@ class HomeFragment : Fragment() {
         val sharedPreferences = requireContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
         val items = retrieveItemsFromSharedPreferences(sharedPreferences)
 
-        // Log the retrieved data
         for (item in items) {
             val category = item.category
             val itemName = item.item
             val isChecked = item.isChecked
 
             Log.d(TAG, "Retrieved Data - Category: $category, Item: $itemName, Checked: $isChecked")
-
-            // Do something with the retrieved data.
         }
 
 
@@ -123,16 +119,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        repeat(4) {
-//            viewModel.testInsert()
-//        }
-//
-     //   viewModel.testInsert()
-//        viewModel.testInsert()
-//        viewModel.testInsert()
-//        viewModel.testInsert()
-
         viewModel.dogsListState.observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Success -> {
@@ -159,9 +145,6 @@ class HomeFragment : Fragment() {
         setupChip()
     }
 
-
-
-        // Retrieve checkbox states for locations
 
 
     private fun setupMenu() {

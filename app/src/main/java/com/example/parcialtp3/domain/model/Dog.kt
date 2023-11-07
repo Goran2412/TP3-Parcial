@@ -32,7 +32,7 @@ fun DogModel.toDomain() = Dog(
     location,
     breed,
     subbreed,
-    images ?: emptyList(), // Provide a default empty list if images is null
+    images ?: emptyList(),
     adopterModel,
     isAdopted,
     observations,

@@ -31,8 +31,6 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
-        //binding.lifecycleOwner = viewLifecycleOwner not working
-
         return binding.root
     }
 
@@ -56,7 +54,6 @@ class SearchFragment : Fragment() {
 
                 menuItem.expandActionView()
                 searchView.doOnLayout {
-                    //searchView.clearFocus()
                 }
 
                 menuItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
@@ -77,11 +74,11 @@ class SearchFragment : Fragment() {
                     }
 
                     override fun onQueryTextSubmit(query: String?): Boolean {
-                        //findNavController().navigate(R.id.action_searchFragment_to_booksReadListFragment)
+
                         val action = query?.let {
-                            //SearchFragmentDirections.actionSearchFragmentToSearchResultListFragment(
+
                                 it
-                            //)
+
                         }
 
                         action?.let {

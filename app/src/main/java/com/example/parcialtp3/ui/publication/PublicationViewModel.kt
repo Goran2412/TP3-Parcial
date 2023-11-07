@@ -146,7 +146,7 @@ class PublicationViewModel @Inject constructor(
         _isFormValid.value = _isBreedValid.value == true && _isSubBreedValid.value == true &&
                 _isValidName.value == true && _isValidAge.value == true &&
                 _isValidDescription.value == true && _isValidWeight.value == true && _isValidLocation.value == true
-        //&&_isValidGender.value == true
+
         Log.d(TAG, "isFormValid ${isFormValid.value}")
     }
 
@@ -211,7 +211,4 @@ class PublicationViewModel @Inject constructor(
 
 }
 
-data class BreedWithSubBreeds(
-    val breedName: String,
-    val subBreeds: List<String>
-)
+

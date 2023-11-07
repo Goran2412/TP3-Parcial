@@ -153,15 +153,15 @@ class MainActivity : AppCompatActivity(), ProfileImageChangeListener {
         super.onResume()
         Log.d(TAG, "onResume")
         binding.drawerLayout.closeDrawers()
-        // Clear the selected item in the navigation drawer
+
         val navigationView =
-            binding.navView// Replace 'navigationView' with the actual ID of your navigation view
+            binding.navView
         val menu = navigationView.menu
 
         for (i in 0 until menu.size()) {
             menu.getItem(i).isChecked = false
         }
-//con eso muestro la imagen de usuario en el header
+
         val navView: NavigationView = binding.navView
         val headerView = navView.getHeaderView(0)
         val navImageView = headerView.findViewById<ImageView>(R.id.profileImage)
@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity(), ProfileImageChangeListener {
     }
 
     override fun onProfileImageChanged(imageUrl: String?) {
-        // Update the profile image in the navigation drawer here
+
         if (imageUrl != null) {
             val navView: NavigationView = binding.navView
             val headerView = navView.getHeaderView(0)

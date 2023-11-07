@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FilterDialogViewModel @Inject constructor(private val dao: DogDao) : ViewModel() {
 
-    fun getDistinctBreedsAndSubbreeds(): LiveData<Pair<List<String>, List<String>>>
+    fun getDistinctBreeds(): LiveData<Pair<List<String>, List<String>>>
     {
         val resultLiveData = MediatorLiveData<Pair<List<String>, List<String>>>()
 
@@ -49,7 +49,5 @@ class FilterDialogViewModel @Inject constructor(private val dao: DogDao) : ViewM
         return dao.getDistinctLocations().asLiveData()
     }
 
-    fun applyFilters(selectedBreeds: List<String>, selectedLocations: List<String>) {
-        // Implement your filter logic using the selected breeds and locations
-    }
+
 }

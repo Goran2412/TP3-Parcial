@@ -20,8 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileFragment: Fragment() {
     private var _binding: FragmentProfileBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -40,7 +40,7 @@ class ProfileFragment: Fragment() {
             textView.text = it
         }
 
-        // Aquí es donde agregas el OnClickListener a tu botón
+
         val uploadButton: Button = binding.uploadButton
         val imageUrlInput: EditText = binding.imageUrlInput
         val sharedPreferences = requireActivity().getSharedPreferences("ProfilePreferences", Context.MODE_PRIVATE)
@@ -56,7 +56,7 @@ class ProfileFragment: Fragment() {
                     editor.putString("ProfileImage", imageUrl)
                     editor.apply()
 
-                    // Carga la imagen en el ImageView
+
                     Picasso.get()
                         .load(imageUrl)
                         .into(binding.profileImage)
