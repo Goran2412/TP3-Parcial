@@ -141,6 +141,7 @@ class HomeFragment : Fragment() {
         }
         setupMenu()
         setupChip()
+        viewModel.testInsert()
     }
 
 
