@@ -37,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/rounded_top_corners_card"
+        android:backgroundTint="?android:colorBackground"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalGuideline"
@@ -108,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:tint="@color/purple_200"
+                app:tint="?attr/colorPrimary"
                 app:srcCompat="@drawable/ic_location" />
 
             <TextView
@@ -144,7 +145,7 @@
                 android:id="@+id/dogAgeIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:tint="@color/purple_200"
+                app:tint="?attr/colorPrimary"
                 app:srcCompat="@drawable/ic_cake"/>
 
         </LinearLayout>
@@ -155,8 +156,11 @@
             android:layout_height="60dp"
             android:background="@drawable/rounded_corners_square"
             android:orientation="horizontal"
+            android:backgroundTint="?attr/colorSurface"
+            android:outlineAmbientShadowColor="?attr/colorOnBackground"
+            android:outlineSpotShadowColor="?attr/colorOnBackground"
             app:cardCornerRadius="16dp"
-            app:cardElevation="10dp"
+            app:cardElevation="8dp"
             app:layout_constraintBottom_toTopOf="@+id/horizontalGuideline3"
             app:layout_constraintEnd_toStartOf="@+id/verticalGuideline"
             app:layout_constraintStart_toStartOf="parent"
@@ -172,7 +176,7 @@
                     android:id="@+id/dogGenreIcon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    app:tint="@color/purple_200"
+                    app:tint="?attr/colorPrimary"
                     android:layout_weight="1"/>
 
                 <TextView
@@ -187,8 +191,11 @@
             android:layout_width="148dp"
             android:layout_height="60dp"
             android:orientation="horizontal"
-            app:cardCornerRadius="16dp"
             android:background="@drawable/rounded_corners_square"
+            android:backgroundTint="?attr/colorSurface"
+            android:outlineAmbientShadowColor="?attr/colorOnBackground"
+            android:outlineSpotShadowColor="?attr/colorOnBackground"
+            app:cardCornerRadius="16dp"
             app:cardElevation="10dp"
             app:layout_constraintBottom_toTopOf="@+id/horizontalGuideline3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -206,7 +213,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:tint="@color/purple_200"
+                    app:tint="?attr/colorPrimary"
                     app:srcCompat="@drawable/ic_weight" />
 
                 <TextView
@@ -273,7 +280,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="28dp"
             android:background="@drawable/circle"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="?attr/colorPrimary"
             android:padding="10dp"
             android:clickable="true"
             app:layout_constraintBottom_toTopOf="@+id/horizontalGuideline4"
@@ -281,7 +288,7 @@
             app:layout_constraintTop_toTopOf="@+id/horizontalGuideline3"
             app:layout_constraintVertical_bias="0.5"
             app:srcCompat="@drawable/ic_phone"
-            app:tint="@color/white" />
+            app:tint="?attr/colorOnPrimary"/>
 
         <ScrollView
             android:layout_width="0dp"
