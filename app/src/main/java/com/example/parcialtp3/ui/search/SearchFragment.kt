@@ -13,10 +13,14 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.parcialtp3.R
+import com.example.parcialtp3.data.dao.DogDao
 import com.example.parcialtp3.databinding.FragmentSearchBinding
+import com.example.parcialtp3.ui.home.CheckboxListAdapter
+import com.example.parcialtp3.ui.home.FilterDialogViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "SearchFragment"
@@ -24,6 +28,8 @@ private const val TAG = "SearchFragment"
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
+    private val viewModel: SearchViewModel by viewModels()
+    private val breedList = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +38,6 @@ class SearchFragment : Fragment() {
     ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         //binding.lifecycleOwner = viewLifecycleOwner not working
-
         return binding.root
     }
 
@@ -40,12 +45,10 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupMenu()
     }
-
     private fun setupMenu() {
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
             override fun onPrepareMenu(menu: Menu) {
             }
-
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.search_menu, menu)
 
@@ -73,6 +76,10 @@ class SearchFragment : Fragment() {
 
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextChange(newText: String?): Boolean {
+                        if (newText != null && newText.length > 3) {
+                            fetchBreeds(newText)
+                            // Actualiza tu UI con las subrazas encontradas
+                        }
                         return true
                     }
 
@@ -96,6 +103,12 @@ class SearchFragment : Fragment() {
                 return true
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED).also {
+        }
+    }
+    private fun fetchBreeds(query: String) {
+        viewModel.searchDistinctBreedsAndSubbreeds(query).observe(viewLifecycleOwner) { (breeds, subbreeds) ->
+            breedList.clear()
+            breedList.addAll(breeds)
         }
     }
 }

@@ -32,8 +32,6 @@ import com.example.parcialtp3.ui.adapter.adapter.DogListener
 import com.example.parcialtp3.ui.adapter.adapter.SaveIconListener
 import dagger.hilt.android.AndroidEntryPoint
 
-
-
 private const val TAG = "HomeFragment"
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -88,7 +86,7 @@ class HomeFragment : Fragment() {
 //            viewModel.testInsert()
 //        }
 //
-     //   viewModel.testInsert()
+//        viewModel.testInsert()
 //        viewModel.testInsert()
 //        viewModel.testInsert()
 //        viewModel.testInsert()
@@ -153,9 +151,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-
     private fun setupChip() {
-
         val nameList =
             arrayListOf("Golden", "Salchicha", "Terrier")
         for (name in nameList) {

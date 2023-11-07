@@ -11,11 +11,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.parcialtp3.databinding.FragmentSearchResultListBinding
+import com.example.parcialtp3.ui.search.SearchViewModel
 
 class SearchResultListFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchResultListBinding
-    private val viewModel: SearchResultViewModel by viewModels()
+    private val viewModel: SearchViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,13 +30,13 @@ class SearchResultListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.recyclerView2.apply {
-            layoutManager = LinearLayoutManager(this.context)
 
-        }
+        binding.recyclerView2.layoutManager = LinearLayoutManager(requireContext())
 
-
+    }
+    private fun handleSearchResults(results: List<String>) {
+        // Actualiza el adaptador con los resultados de la búsqueda
+        // Asegúrate de que el adaptador esté configurado para mostrar los resultados adecuadamente
     }
 
     private fun handleLoading(isLoading: Boolean) {
