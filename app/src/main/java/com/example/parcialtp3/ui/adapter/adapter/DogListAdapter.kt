@@ -2,6 +2,7 @@ package com.example.parcialtp3.ui.adapter.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,25 +14,38 @@ import com.example.parcialtp3.databinding.ItemDogBinding
 
 private const val TAG = "DogListAdapter"
 
-class DogListAdapter(val clickListener: DogListener, val saveIconListener: SaveIconListener) : ListAdapter<Dog, DogListAdapter.DogViewHolder>(DogDiffCallback()) {
-override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
-    return DogViewHolder(
-        ItemDogBinding.inflate(
-            LayoutInflater.from(
-                parent.context
+class DogListAdapter(
+    val clickListener: DogListener,
+    val saveIconListener: SaveIconListener,
+    val showSaveIcon: Boolean = true
+) : ListAdapter<Dog, DogListAdapter.DogViewHolder>(DogDiffCallback()) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
+        return DogViewHolder(
+            ItemDogBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                )
             )
         )
-    )
-}
+    }
 
     override fun onBindViewHolder(holder: DogViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item,clickListener)
+        holder.bind(item, clickListener)
+
     }
 
-    inner class DogViewHolder(private val binding: ItemDogBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class DogViewHolder(private val binding: ItemDogBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(perro: Dog, clickListener: DogListener) {
+
+            if (showSaveIcon) {
+                binding.saveIcon.visibility = View.VISIBLE
+            } else {
+                binding.saveIcon.visibility = View.INVISIBLE
+            }
+
             binding.dog = perro
             binding.dogName.text = perro.name
             binding.dogBreedName.text = perro.breed

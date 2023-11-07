@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
         binding.recyclerView.adapter = DogListAdapter(DogListener { dog, dogId ->
             Log.d(TAG, "dog${dog.name} id $dogId")
             //  viewModel.updateDogFavouriteStatus(dogId, !dog.isFavourite)
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(dog))
         },
             SaveIconListener { dogId ->
                 Log.d(TAG, "$dogId")
@@ -59,7 +60,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-          // viewModel.testInsert()
+//        repeat(4) {
+//            viewModel.testInsert()
+//        }
+//
+//        viewModel.testInsert()
+//        viewModel.testInsert()
+//        viewModel.testInsert()
+//        viewModel.testInsert()
 
         viewModel.dogsListState.observe(viewLifecycleOwner) {
             when (it) {

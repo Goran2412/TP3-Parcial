@@ -58,6 +58,19 @@ class DogsRepositoryImpl @Inject constructor(
             }
     }
 
+    override fun getAdoptedDogs(): Flow<Result<List<Dog>>> {
+        return dogDao.getAdoptedDogs()
+            .map { dogModels ->
+                val adoptedDogs = dogModels.filter { it.isAdopted }.map { it.toDomain() }
+                Result.Success(adoptedDogs) as Result<List<Dog>>
+            }
+            .onStart { emit(Result.Loading) }
+            .flowOn(Dispatchers.IO)
+            .catch { e ->
+                emit(Result.Error(e.message ?: "Error in fetching adopted dogs"))
+            }
+    }
+
 
     override suspend fun getAllBreeds(): Result<DogBreedsResponse> {
         return try {

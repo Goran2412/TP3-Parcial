@@ -1,7 +1,10 @@
 package com.example.parcialtp3.domain.model
 
+import android.os.Parcelable
 import com.example.parcialtp3.data.model.DogModel
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Dog(
     val id : Int,
     val name: String?,
@@ -17,7 +20,8 @@ data class Dog(
     val isAdopted: Boolean?,
     val observations: String?,
     val isFavourite: Boolean
-)
+): Parcelable
+
 fun DogModel.toDomain() = Dog(
     id,
     name,

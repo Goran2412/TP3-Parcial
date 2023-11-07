@@ -71,7 +71,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.adoptionFragment,
                 R.id.recyclerView,
                 R.id.publicationFragment,
-                R.id.detailsFragment
             ), drawerLayout
         )
 
