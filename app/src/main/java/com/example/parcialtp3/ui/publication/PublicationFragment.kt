@@ -91,36 +91,6 @@ class PublicationFragment : Fragment() {
             }
         }
 
-
-        viewModel.randomImages.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Success -> {
-                    // Aquí tienes acceso a la lista de URLs de las imágenes
-                    val imageUrls = result.data?.message
-                    Log.d(TAG, "Imágenes obtenidas: $imageUrls")
-
-                    // Limpia el LinearLayout antes de agregar las nuevas vistas
-                    binding.imageUrlsLayout.removeAllViews()
-
-                    // Crea un TextView para cada URL y lo agrega al LinearLayout
-                    imageUrls?.forEach { imageUrl ->
-                        val textView = TextView(context)
-                        textView.text = imageUrl
-                        binding.imageUrlsLayout.addView(textView)
-                    }
-                }
-                is Result.Error -> {
-                    // Manejar el error aquí
-                    Log.d(TAG, "Error al obtener imágenes: ${result.message}")
-                }
-                is Result.Loading -> {
-                    // Manejar el estado de carga aquí si es necesario
-                    Log.d(TAG, "Cargando imágenes...")
-                }
-                else -> { Unit }
-            }
-        }
-
         viewModel.selectedBreed.observe(viewLifecycleOwner) { selectedBreed ->
             val breedWithSubBreeds = viewModel.breedsList.value?.find { it.breedName == selectedBreed }
 
@@ -155,6 +125,35 @@ class PublicationFragment : Fragment() {
                     "",
                     false
                 ) // Clear the text without triggering the AutoComplete dropdown
+            }
+        }
+
+        viewModel.randomImages.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Success -> {
+                    // Aquí tienes acceso a la lista de URLs de las imágenes
+                    val imageUrls = result.data?.message
+                    Log.d(TAG, "Imágenes obtenidas: $imageUrls")
+
+                    // Limpia el LinearLayout antes de agregar las nuevas vistas
+                    binding.imageUrlsLayout.removeAllViews()
+
+                    // Crea un TextView para cada URL y lo agrega al LinearLayout
+                    imageUrls?.forEach { imageUrl ->
+                        val textView = TextView(context)
+                        textView.text = imageUrl
+                        binding.imageUrlsLayout.addView(textView)
+                    }
+                }
+                is Result.Error -> {
+                    // Manejar el error aquí
+                    Log.d(TAG, "Error al obtener imágenes: ${result.message}")
+                }
+                is Result.Loading -> {
+                    // Manejar el estado de carga aquí si es necesario
+                    Log.d(TAG, "Cargando imágenes...")
+                }
+                else -> { Unit }
             }
         }
     }
