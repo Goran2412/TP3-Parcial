@@ -1,6 +1,7 @@
 package com.example.parcialtp3.ui.home
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
@@ -32,6 +33,7 @@ import com.google.android.material.chip.Chip
 import com.example.parcialtp3.ui.adapter.adapter.DogListAdapter
 import com.example.parcialtp3.ui.adapter.adapter.DogListener
 import com.example.parcialtp3.ui.adapter.adapter.SaveIconListener
+import com.example.parcialtp3.ui.filter.CategorizedItem
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -79,23 +81,45 @@ class HomeFragment : Fragment() {
 
         moreFiltersButton.movementMethod = LinkMovementMethod.getInstance()
 
-        val sharedPrefs = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val sharedPreferences = requireContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
+        val items = retrieveItemsFromSharedPreferences(sharedPreferences)
 
-        // Example: Retrieving the checkbox state for a specific breed
-        val breedKey = "Breed_Dog" // Change this to the specific breed you're interested in
-        val isChecked = sharedPrefs.getBoolean(breedKey, false)
+        // Log the retrieved data
+        for (item in items) {
+            val category = item.category
+            val itemName = item.item
+            val isChecked = item.isChecked
 
-        // Log the retrieved checkbox state
-        Log.d("CheckboxState", "Category: Breed, Item: Dog, isChecked: $isChecked")
+            Log.d(TAG, "Retrieved Data - Category: $category, Item: $itemName, Checked: $isChecked")
 
-        // Use the isChecked value as needed
+            // Do something with the retrieved data.
+        }
+
 
 
         return binding.root
 
-
-
     }
+
+
+    private fun retrieveItemsFromSharedPreferences(sharedPreferences: SharedPreferences): List<CategorizedItem> {
+        val items = mutableListOf<CategorizedItem>()
+
+        for (i in 0 until sharedPreferences.all.size) {
+            val keyChecked = "selected_$i"
+            val keyCategory = "category_$i"
+            val keyItem = "item_$i"
+
+            val isChecked = sharedPreferences.getBoolean(keyChecked, false)
+            val category = sharedPreferences.getString(keyCategory, "") ?: ""
+            val item = sharedPreferences.getString(keyItem, "") ?: ""
+
+            items.add(CategorizedItem(category, item, isChecked))
+        }
+
+        return items
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
