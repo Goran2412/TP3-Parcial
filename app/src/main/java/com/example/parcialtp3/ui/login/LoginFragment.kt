@@ -80,6 +80,8 @@ class LoginFragment : Fragment() {
 
             if (isValidEmail(email) && isValidPassword(password)) {
                 findNavController().navigate(R.id.homeFragment)
+                val navController = findNavController()
+                navController.popBackStack(R.id.loginFragment, false)
             } else {
                 Toast.makeText(context, "Credenciales inválidas. Inténtalo de nuevo.", Toast.LENGTH_SHORT).show()
             }
