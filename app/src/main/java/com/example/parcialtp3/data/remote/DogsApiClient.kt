@@ -12,4 +12,5 @@ interface DogsApiClient {
     //pido imagenes
     @GET("breed/{breed}/images/random/{count}")
     suspend fun getRandomImages(@Path("breed") breed: String, @Path("count") count: Int): DogImagesResponse
+
 }

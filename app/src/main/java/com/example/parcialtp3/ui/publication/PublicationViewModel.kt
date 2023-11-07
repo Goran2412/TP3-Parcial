@@ -37,6 +37,7 @@ class PublicationViewModel @Inject constructor(
         _selectedBreed.value = breed
     }
 
+
     //TODO: probar como usar esto (si funciona), hasta ahora todo es dolor
     fun getRandomImages(breed: String, count: Int = 5) {
         viewModelScope.launch {
@@ -46,6 +47,8 @@ class PublicationViewModel @Inject constructor(
             }
         }
     }
+
+
 
 
     fun getAllBreeds() {

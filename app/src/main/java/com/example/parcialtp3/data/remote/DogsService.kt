@@ -12,4 +12,5 @@ class DogsService @Inject constructor(private val dogsApiClient: DogsApiClient) 
     suspend fun getRandomImages(breed: String, count: Int): DogImagesResponse {
         return dogsApiClient.getRandomImages(breed, count)
     }
+
 }

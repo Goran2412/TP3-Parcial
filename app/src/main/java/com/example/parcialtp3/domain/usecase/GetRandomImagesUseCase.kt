@@ -6,7 +6,8 @@ import com.example.parcialtp3.domain.repository.DogsRepository
 import javax.inject.Inject
 
 class GetRandomImagesUseCase @Inject constructor(private val dogsRepository: DogsRepository) {
-    suspend operator fun invoke(breed: String, count: Int): Result<DogImagesResponse> {
-        return dogsRepository.getRandomImages(breed, count)
-    }
+   suspend operator fun invoke(breed: String, count: Int): Result<DogImagesResponse> {
+       return dogsRepository.getRandomImages(breed, count)
+   }
+
 }
