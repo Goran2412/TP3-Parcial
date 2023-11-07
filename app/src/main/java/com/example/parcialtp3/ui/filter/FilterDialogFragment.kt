@@ -67,15 +67,15 @@ class FilterDialogFragment : DialogFragment() {
 
     private fun fetchBreeds() {
         viewModel.getDistinctBreedsAndSubbreeds().observe(viewLifecycleOwner) { (breeds, subbreeds) ->
-         
             breedList.clear()
             val sharedPrefs = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             val list = breeds.map { breed ->
-                val item = CategorizedItem("Breed", breed)
-                item.isChecked = sharedPrefs.getBoolean("Breed_${breed}", false) // Restore checkbox state
+                val category = "Breed"
+                val item = CategorizedItem(category, breed)
+                val key = "${category}_${breed}"
+                item.isChecked = sharedPrefs.getBoolean(key, false) // Restore checkbox state
                 item
             }
-            Log.d ("Prueba" , "milist $list")
             breedList.addAll(list)
             breedAdapter = CheckboxListAdapter(requireContext(), list)
             breedListView.adapter = breedAdapter
@@ -88,8 +88,10 @@ class FilterDialogFragment : DialogFragment() {
             locationList.clear()
             val sharedPrefs = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             val list = locations.map { location ->
-                val item = CategorizedItem("Location", location)
-                item.isChecked = sharedPrefs.getBoolean("Location_${location}", false) // Restore checkbox state
+                val category = "Location"
+                val item = CategorizedItem(category, location)
+                val key = "${category}_${location}"
+                item.isChecked = sharedPrefs.getBoolean(key, false) // Restore checkbox state
                 item
             }
             locationList.addAll(list)
@@ -99,7 +101,7 @@ class FilterDialogFragment : DialogFragment() {
         }
     }
 
-    private fun getSelectedItems(listView: ListView): List<String> {
+            private fun getSelectedItems(listView: ListView): List<String> {
         val selectedItems =mutableListOf<String>()
         val checkedItemPositions = listView.checkedItemPositions
         val adapter = listView.adapter as CheckboxListAdapter

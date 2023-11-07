@@ -20,9 +20,5 @@
             android:icon="@drawable/ic_configuration"
             android:title="@string/configuracion" />
 
-        <item
-            android:id="@+id/detailsFragment"
-            android:icon="@drawable/ic_favourites"
-            android:title="(PH) - Detalles" />
     </group>
 </menu>
