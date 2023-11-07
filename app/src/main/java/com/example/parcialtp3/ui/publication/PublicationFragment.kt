@@ -255,7 +255,7 @@ class PublicationFragment : Fragment() {
                     weight = dogWeight.toDoubleOrNull(),
                     location = dogLocation,
                     breed = breed,
-                    subbreed = if (binding.dogSubBreedLayout.visibility == View.VISIBLE) subBreed else null,
+                    subbreed = subBreed,
                     images = imageUrls,
                     adopterModel = null, // Set to null if not adopted yet
                     isAdopted = false,
