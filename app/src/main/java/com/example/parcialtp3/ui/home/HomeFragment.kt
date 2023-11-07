@@ -36,8 +36,6 @@ import com.example.parcialtp3.ui.adapter.adapter.SaveIconListener
 import com.example.parcialtp3.ui.filter.CategorizedItem
 import dagger.hilt.android.AndroidEntryPoint
 
-
-
 private const val TAG = "HomeFragment"
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -181,9 +179,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-
     private fun setupChip() {
-
         val nameList =
             arrayListOf("Golden", "Salchicha", "Terrier")
         for (name in nameList) {

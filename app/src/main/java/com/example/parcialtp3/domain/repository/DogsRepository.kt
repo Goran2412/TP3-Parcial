@@ -10,13 +10,10 @@ import kotlinx.coroutines.flow.Flow
 interface DogsRepository {
     fun getAllDogs(): Flow<Result<List<Dog>>>
     suspend fun getAllBreeds(): Result<DogBreedsResponse>
-
     fun getFavoriteDogs(): Flow<Result<List<Dog>>>
-
     fun getAdoptedDogs(): Flow<Result<List<Dog>>>
     suspend fun addDog(dog: DogModel): Result<Unit>
-
     suspend fun getRandomImages(breed: String, count: Int): Result<DogImagesResponse>
-
+    fun getDogsByBreed(breed: String): Flow<Result<List<Dog>>>
 
 }

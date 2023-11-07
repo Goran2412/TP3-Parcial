@@ -49,14 +49,10 @@
         android:name="com.example.parcialtp3.ui.search.SearchFragment"
         android:label="@string/b_squeda" >
         <action
-            android:id="@+id/action_searchFragment_to_searchResultListFragment"
-            app:destination="@id/searchResultListFragment" />
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/searchResultListFragment"
-        android:name="com.example.parcialtp3.ui.searchResult.SearchResultListFragment"
-        android:label="@string/resultados" />
     <fragment
         android:id="@+id/filterDialogFragment"
         android:name="com.example.parcialtp3.ui.filter.FilterDialogFragment"

@@ -99,6 +99,18 @@ class DogsRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getDogsByBreed(breed: String): Flow<Result<List<Dog>>> {
+        return dogDao.getDogsByBreed(breed)
+            .map { dogModels ->
+                val dogs = dogModels.map { it.toDomain() }
+                Result.Success(dogs) as Result<List<Dog>>
+            }
+            .onStart { emit(Result.Loading) }
+            .flowOn(Dispatchers.IO)
+            .catch { e ->
+                emit(Result.Error(e.message ?: "Error in dogs database"))
+            }
+    }
 }
 
 

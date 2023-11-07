@@ -41,7 +41,6 @@ class FilterDialogViewModel @Inject constructor(private val dao: DogDao) : ViewM
                 }
             }
         }
-
         return resultLiveData
     }
 
