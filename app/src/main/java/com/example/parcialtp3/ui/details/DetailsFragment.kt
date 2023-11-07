@@ -32,7 +32,7 @@ class DetailsFragment : Fragment() {
     private val viewModel : DetailsViewModel by viewModels()
 
     private lateinit var dogOwnerName: TextView
-    private val dogOwnerPhoneNumber = "12345678"
+    private lateinit var dogOwnerPhoneNumber: String
     private lateinit var dogOwnerImage: ImageView
     private lateinit var dogNameText: TextView
     private lateinit var locationText: TextView
@@ -160,9 +160,8 @@ class DetailsFragment : Fragment() {
         dogWeightText.text = viewModel.dog.weight?.toString() ?: "Unknown"
         dogDescriptionText.text = viewModel.dog.description ?: "No description available"
 
-        dogDescriptionText?.text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque laudantium iste accusantium id asperiores assumenda labore minima aut ut at ducimus, possimus, dolores tempore amet magni mollitia autem blanditiis nulla asperiores assumenda labore minima aut ut at ducimus"
-
         //Owner Details
-        dogOwnerName?.text = "Juan Perez"
+        dogOwnerName?.text = viewModel.dog.adopterModel?.name ?: "Unknown"
+        dogOwnerPhoneNumber = viewModel.dog.adopterModel?.phone.toString()
     }
 }
