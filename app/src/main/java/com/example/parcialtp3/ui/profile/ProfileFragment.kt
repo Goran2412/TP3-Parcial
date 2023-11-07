@@ -60,8 +60,8 @@ class ProfileFragment: Fragment() {
                         .load(imageUrl)
                         .into(binding.profileImage)
 
-                    if (activity is ProfileImageChangeListener) {
-                        (activity as ProfileImageChangeListener).onProfileImageChanged(imageUrl)
+                    if (requireActivity() is ProfileImageChangeListener) {
+                        (requireActivity() as ProfileImageChangeListener).onProfileImageChanged(imageUrl)
                     }
 
                 }
