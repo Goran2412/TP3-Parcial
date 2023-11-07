@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/adoptionFragment"
         android:name="com.example.parcialtp3.ui.adoption.AdoptionFragment"
-        android:label="fragment_adoption"
+        android:label="@string/mis_adopciones"
         tools:layout="@layout/fragment_adoption" />
 
     <fragment

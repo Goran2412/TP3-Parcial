@@ -20,7 +20,7 @@ data class DogModel(
     val subbreed: String?,
     val images: List<String>?,
     val adopterModel: AdopterModel?,
-    val isAdopted: Boolean?,
+    val isAdopted: Boolean,
     val observations: String?,
     var isFavourite: Boolean
 ) {

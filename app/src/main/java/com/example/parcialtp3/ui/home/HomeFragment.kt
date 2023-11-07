@@ -60,7 +60,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-          // viewModel.testInsert()
+//        repeat(4) {
+//            viewModel.testInsert()
+//        }
+//
+//        viewModel.testInsert()
+//        viewModel.testInsert()
+//        viewModel.testInsert()
+//        viewModel.testInsert()
 
         viewModel.dogsListState.observe(viewLifecycleOwner) {
             when (it) {

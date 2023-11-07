@@ -134,7 +134,7 @@
             android:id="@+id/dog_weight_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Peso del perro">
+            android:hint="@string/peso_del_perro_en_kg">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dogWeight"

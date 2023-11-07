@@ -21,12 +21,16 @@ interface DogDao {
     @Update
     suspend fun updateDog(dogModel: DogModel)
 
-    @Query("SELECT * FROM dogs")
+    @Query("SELECT * FROM dogs WHERE isAdopted = 0")
+   // @Query("SELECT * FROM dogs")
     // suspend fun getAllDogs(): List<DogModel>
     fun getAllDogs(): Flow<List<DogModel>> //this should be Flow<List<DogModel>>
 
     @Query("SELECT * FROM dogs WHERE isFavourite = 1")
     fun getFavoriteDogs(): Flow<List<DogModel>>
+
+    @Query("SELECT * FROM dogs WHERE isAdopted = 1")
+    fun getAdoptedDogs(): Flow<List<DogModel>>
 
     @Query("UPDATE dogs SET isAdopted = 1, isFavourite = 0 WHERE id = :dogId")
     suspend fun adoptDog(dogId: Int)
