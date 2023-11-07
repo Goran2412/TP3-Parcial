@@ -2,11 +2,13 @@ package com.example.parcialtp3.ui
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.MenuProvider
@@ -23,6 +25,7 @@ import com.example.parcialtp3.R
 import com.example.parcialtp3.databinding.ActivityMainBinding
 import com.example.parcialtp3.ui.settings.SettingsActivity
 import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -34,6 +37,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavigationView: NavigationView
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var listener: SharedPreferences.OnSharedPreferenceChangeListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("ProfilePreferences", Context.MODE_PRIVATE)
         val isDarkMode = sharedPreferences.getBoolean("darkMode", false)
 
         if (isDarkMode) {
@@ -117,6 +122,23 @@ class MainActivity : AppCompatActivity() {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
         }
+
+
+        listener = SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
+            if (key == "ProfileImage") {
+                val imageUrl = sharedPreferences.getString("ProfileImage", null)
+                if (imageUrl != null) {
+                    val navView: NavigationView = binding.navView
+                    val headerView = navView.getHeaderView(0)
+                    val navImageView = headerView.findViewById<ImageView>(R.id.profileImage)
+                    Picasso.get()
+                        .load(imageUrl)
+                        .into(navImageView)
+                }
+            }
+        }
+
+        sharedPreferences.registerOnSharedPreferenceChangeListener(listener)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -137,5 +159,24 @@ class MainActivity : AppCompatActivity() {
         for (i in 0 until menu.size()) {
             menu.getItem(i).isChecked = false
         }
+//con eso muestro la imagen de usuario en el header
+        val navView: NavigationView = binding.navView
+        val headerView = navView.getHeaderView(0)
+        val navImageView = headerView.findViewById<ImageView>(R.id.profileImage)
+
+        val sharedPreferences = getSharedPreferences("ProfilePreferences", Context.MODE_PRIVATE)
+        val imageUrl = sharedPreferences.getString("ProfileImage", null)
+
+        if (imageUrl != null) {
+            Picasso.get()
+                .load(imageUrl)
+                .into(navImageView)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(listener)
     }
 }
