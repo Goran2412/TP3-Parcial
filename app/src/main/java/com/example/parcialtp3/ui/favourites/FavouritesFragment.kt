@@ -24,6 +24,7 @@ import com.example.parcialtp3.databinding.FragmentFavouritesBinding
 import com.example.parcialtp3.ui.adapter.adapter.DogListAdapter
 import com.example.parcialtp3.ui.adapter.adapter.DogListener
 import com.example.parcialtp3.ui.adapter.adapter.SaveIconListener
+import com.example.parcialtp3.ui.home.HomeFragmentDirections
 
 
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +46,7 @@ class FavouritesFragment : Fragment() {
         binding = FragmentFavouritesBinding.inflate(inflater, container, false)
         binding.recyclerView.adapter = DogListAdapter(DogListener { dog, dogId ->
             Log.d(TAG, "dog${dog.name} id $dogId")
+            findNavController().navigate(FavouritesFragmentDirections.actionFavouritesFragmentToDetailsFragment(dog))
         },
             SaveIconListener { dogId ->
                 Log.d(TAG, "$dogId")
