@@ -36,9 +36,10 @@ class SearchFragment : Fragment() {
     private val viewModel: SearchViewModel by viewModels()
     private val breedList = mutableListOf<String>()
 
-    private val dogAdapter = DogAdapter(DogListener { dog, id ->
-
-    }, SaveIconListener { id ->
+    private val dogAdapter = DogAdapter(DogListener { dog, _ ->
+        val action = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(dog)
+        findNavController().navigate(action)
+    }, SaveIconListener { _ ->
         // Handle save icon click
     })
 
