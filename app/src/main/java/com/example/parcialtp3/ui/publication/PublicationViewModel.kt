@@ -168,7 +168,7 @@ class PublicationViewModel @Inject constructor(
 
     fun getRandomImages(breed: String, count: Int = 5) {
         viewModelScope.launch {
-            val result = getRandomImagesUseCase(breed, count)
+            val result = getRandomImagesUseCase(breed.lowercase(), count)
             if (result is Result.Success) {
                 _randomImages.postValue(result)
             }
