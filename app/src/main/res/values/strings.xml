@@ -13,6 +13,7 @@
     <string name="generales">Generales</string>
     <string name="modo_oscuro">Modo oscuro</string>
     <string name="search_hint">Buscá por raza o por ubicación</string>
+    <string name="more_filters">Más Filtros</string>
     <string name="mascotas_en_adopcion">Mascotas en adopción</string>
     <string name="ubicacion_del_perro">Ubicación del perro</string>
     <string name="mis_favoritos">Mis favoritos</string>

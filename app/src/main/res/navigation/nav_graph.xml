@@ -14,8 +14,8 @@
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            android:id="@+id/action_homeFragment_to_filterDialogFragment"
+            app:destination="@id/filterDialogFragment" />
     </fragment>
 
     <fragment
@@ -53,6 +53,10 @@
         android:id="@+id/searchResultListFragment"
         android:name="com.example.parcialtp3.ui.searchResult.SearchResultListFragment"
         android:label="SearchResultListFragment" />
+    <fragment
+        android:id="@+id/filterDialogFragment"
+        android:name="com.example.parcialtp3.ui.home.FilterDialogFragment"
+        android:label="FilterDialogFragment" />
 
 <fragment
         android:id="@+id/detailsFragment"

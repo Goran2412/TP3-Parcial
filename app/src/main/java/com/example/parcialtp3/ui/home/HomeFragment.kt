@@ -1,6 +1,9 @@
 package com.example.parcialtp3.ui.home
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -20,15 +23,17 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.parcialtp3.R
+import com.example.parcialtp3.databinding.ChipBinding
 
 import com.example.parcialtp3.databinding.FragmentHomeBinding
+import com.google.android.material.chip.Chip
 import com.example.parcialtp3.ui.adapter.adapter.DogListAdapter
 import com.example.parcialtp3.ui.adapter.adapter.DogListener
 import com.example.parcialtp3.ui.adapter.adapter.SaveIconListener
 import dagger.hilt.android.AndroidEntryPoint
 
 
-private const val TAG = "HomeFragment"
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -55,6 +60,22 @@ class HomeFragment : Fragment() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
         return binding.root
+        val moreFiltersButton = binding.moreFiltersButton
+
+        val text = SpannableString(getString(R.string.more_filters))
+
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                findNavController().navigate(R.id.action_homeFragment_to_filterDialogFragment)
+            }
+        }
+        text.setSpan(clickableSpan, 0, text.length, 0)
+
+        moreFiltersButton.text = text
+
+        moreFiltersButton.movementMethod = LinkMovementMethod.getInstance()
+
+        return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,8 +113,13 @@ class HomeFragment : Fragment() {
             }
         }
         setupMenu()
+        setupChip()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     private fun setupMenu() {
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
@@ -128,5 +154,23 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+
+    private fun setupChip() {
+
+        val nameList =
+            arrayListOf("Golden", "Salchicha", "Terrier")
+        for (name in nameList) {
+            val chip = createChip(name)
+            binding.chipGroup.addView(chip)
+        }
+
+    }
+    private fun createChip(label: String): Chip {
+        val chip = ChipBinding.inflate(layoutInflater).root
+        chip.text = label
+        return chip
+    }
+
 
 }
