@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 private const val TAG = "AdoptionFragment"
+
 @AndroidEntryPoint
 class AdoptionFragment : Fragment() {
 
@@ -40,7 +41,8 @@ class AdoptionFragment : Fragment() {
             //  viewModel.updateDogFavouriteStatus(dogId, !dog.isFavourite)
         },
             SaveIconListener {
-            })
+            }, showSaveIcon = false
+        )
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
         return binding.root

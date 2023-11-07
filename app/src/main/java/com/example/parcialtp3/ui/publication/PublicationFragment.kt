@@ -14,6 +14,7 @@ import com.example.parcialtp3.common.Provincias
 import com.example.parcialtp3.common.Result
 import com.example.parcialtp3.data.model.DogModel
 import com.example.parcialtp3.databinding.FragmentPublicationBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "PublicationFragment"
@@ -223,6 +224,8 @@ class PublicationFragment : Fragment() {
                 )
 
                 viewModel.insertDog(dog)
+                clearForm()
+                dog.name?.let {showSuccessfulDogPublished(it) }
             }
         }
     }
@@ -241,6 +244,26 @@ class PublicationFragment : Fragment() {
 
     private fun String.titleCaseFirstChar(): String { //should move to ex package
         return replaceFirstChar { it.titlecase() }
+    }
+
+    private fun clearForm(){
+        binding.apply {
+            dogBreed.text.clear()
+            dogSubBreed.text.clear()
+            dogName.text?.clear()
+            dogAge.text?.clear()
+            dogGender.clearCheck()
+            dogDescription.text?.clear()
+            dogWeight.text?.clear()
+            dogLocation.text.clear()
+        }
+    }
+
+    private fun showSuccessfulDogPublished(dogName: String) {
+        val message = "Bienvenido $dogName! Perrito publicado con éxito"
+        val snackbar = Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG)
+
+        snackbar.show()
     }
 
 }
