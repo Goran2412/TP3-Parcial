@@ -30,7 +30,7 @@ class LandingPageFragment : Fragment() {
 
         //para viajar al homeFragment al apretar el boton
         roundButton.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
+            findNavController().navigate(LandingPageFragmentDirections.actionLandingPageFragmentToHomeFragment())
         }
 
         val viewPager: ViewPager2 = view.findViewById(R.id.imagesCarrousel)

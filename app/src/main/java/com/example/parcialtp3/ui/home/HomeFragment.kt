@@ -1,5 +1,6 @@
 package com.example.parcialtp3.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
@@ -16,6 +17,7 @@ import androidx.fragment.app.viewModels
 import com.example.parcialtp3.common.Result
 
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 
@@ -40,6 +42,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,10 +79,22 @@ class HomeFragment : Fragment() {
 
         moreFiltersButton.movementMethod = LinkMovementMethod.getInstance()
 
-        return binding.root
+        val sharedPrefs = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
+        // Example: Retrieving the checkbox state for a specific breed
+        val breedKey = "Breed_Dog" // Change this to the specific breed you're interested in
+        val isChecked = sharedPrefs.getBoolean(breedKey, false)
+
+        // Log the retrieved checkbox state
+        Log.d("CheckboxState", "Category: Breed, Item: Dog, isChecked: $isChecked")
+
+        // Use the isChecked value as needed
 
 
         return binding.root
+
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -118,6 +134,11 @@ class HomeFragment : Fragment() {
         setupMenu()
         setupChip()
     }
+
+
+
+        // Retrieve checkbox states for locations
+
 
     private fun setupMenu() {
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
