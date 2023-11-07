@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
 
     <fragment
@@ -55,6 +58,14 @@
         android:id="@+id/detailsFragment"
         android:name="com.example.parcialtp3.ui.details.DetailsFragment"
         android:label="Detalles"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details">
+
+    <argument
+        android:name="dog"
+        app:argType="com.example.parcialtp3.domain.model.Dog" />
+
+</fragment>
+
+
 
 </navigation>

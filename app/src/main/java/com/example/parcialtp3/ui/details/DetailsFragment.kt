@@ -12,14 +12,19 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.parcialtp3.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
+
+    private val viewModel : DetailsViewModel by viewModels()
 
     private lateinit var dogOwnerName: TextView
     private val dogOwnerPhoneNumber = "12345678"
@@ -84,6 +89,8 @@ class DetailsFragment : Fragment() {
         adoptButton.setOnClickListener {
             adoptDog()
         }
+
+        viewModel.showDog()
     }
 
     override fun onDestroyView() {

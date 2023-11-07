@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
         binding.recyclerView.adapter = DogListAdapter(DogListener { dog, dogId ->
             Log.d(TAG, "dog${dog.name} id $dogId")
             //  viewModel.updateDogFavouriteStatus(dogId, !dog.isFavourite)
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(dog))
         },
             SaveIconListener { dogId ->
                 Log.d(TAG, "$dogId")

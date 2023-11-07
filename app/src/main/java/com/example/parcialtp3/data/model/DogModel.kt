@@ -1,7 +1,9 @@
 package com.example.parcialtp3.data.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 
 @Entity(tableName = "dogs")
@@ -22,10 +24,11 @@ data class DogModel(
     val observations: String?,
     var isFavourite: Boolean
 ) {
+    @Parcelize
     data class AdopterModel(
         val name: String,
         val phone: String
-    )
+    ): Parcelable
 }
 
 sealed class MainBreed(val breedName: String) {
