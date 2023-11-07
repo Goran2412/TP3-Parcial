@@ -39,6 +39,7 @@
         tools:layout="@layout/fragment_profile" />
 
     <fragment
+<<<<<<< HEAD
         android:id="@+id/dogsCatalogFragment"
         android:name="com.example.parcialtp3.ui.adapter.DogsListFragment"
         android:label="Perros"
@@ -57,4 +58,10 @@
         android:name="com.example.parcialtp3.ui.searchResult.SearchResultListFragment"
         android:label="SearchResultListFragment" />
 
+=======
+        android:id="@+id/detailsFragment"
+        android:name="com.example.parcialtp3.ui.details.DetailsFragment"
+        android:label="Detalles"
+        tools:layout="@layout/fragment_details" />
+>>>>>>> lg/feature/detailScreen
 </navigation>

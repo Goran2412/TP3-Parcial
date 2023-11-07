@@ -17,4 +17,8 @@
     <string name="ubicacion_del_perro">Ubicación del perro</string>
     <string name="mis_favoritos">Mis favoritos</string>
 
+    <!-- Dog Details -->
+    <string name="owner_title">Dueño</string>
+    <string name="adopt_btn_text">Adoptar</string>
+
 </resources>
