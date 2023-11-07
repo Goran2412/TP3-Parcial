@@ -67,15 +67,17 @@ class FilterDialogFragment : DialogFragment() {
 
     private fun fetchBreeds() {
         viewModel.getDistinctBreedsAndSubbreeds().observe(viewLifecycleOwner) { (breeds, subbreeds) ->
+         
             breedList.clear()
             val sharedPrefs = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-            val listo = breeds.map { breed ->
+            val list = breeds.map { breed ->
                 val item = CategorizedItem("Breed", breed)
                 item.isChecked = sharedPrefs.getBoolean("Breed_${breed}", false) // Restore checkbox state
                 item
             }
-            breedList.addAll(listo)
-            breedAdapter = CheckboxListAdapter(requireContext(), listo)
+            Log.d ("Prueba" , "milist $list")
+            breedList.addAll(list)
+            breedAdapter = CheckboxListAdapter(requireContext(), list)
             breedListView.adapter = breedAdapter
             breedAdapter.notifyDataSetChanged()
         }
@@ -98,7 +100,7 @@ class FilterDialogFragment : DialogFragment() {
     }
 
     private fun getSelectedItems(listView: ListView): List<String> {
-        val selectedItems = mutableListOf<String>()
+        val selectedItems =mutableListOf<String>()
         val checkedItemPositions = listView.checkedItemPositions
         val adapter = listView.adapter as CheckboxListAdapter
 
@@ -117,4 +119,3 @@ class FilterDialogFragment : DialogFragment() {
 }
 
 
-data class CategorizedItem(val category: String, val item: String, var isChecked: Boolean = false)
