@@ -1,6 +1,9 @@
 package com.example.parcialtp3.ui.filter
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 
 class FilterDialogFragment : DialogFragment() {
-
     private val viewModel: FilterDialogViewModel by viewModels()
 
     private lateinit var breedAdapter: CheckboxListAdapter
@@ -37,6 +39,9 @@ class FilterDialogFragment : DialogFragment() {
         breedAdapter = CheckboxListAdapter(requireContext(), breedList)
         locationAdapter = CheckboxListAdapter(requireContext(), locationList)
 
+
+
+
         breedListView.adapter = breedAdapter
         locationListView.adapter = locationAdapter
 
@@ -56,7 +61,6 @@ class FilterDialogFragment : DialogFragment() {
             dismiss()
         }
 
-        // Move the fetchBreeds and fetchLocations calls to onViewCreated
         fetchBreeds()
         fetchLocations()
 
@@ -66,6 +70,7 @@ class FilterDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
 
     private fun fetchBreeds() {
         viewModel.getDistinctBreedsAndSubbreeds().observe(viewLifecycleOwner) { (breeds, subbreeds) ->
@@ -80,6 +85,7 @@ class FilterDialogFragment : DialogFragment() {
     private fun fetchLocations() {
         viewModel.getDistinctLocations().observe(viewLifecycleOwner) { locations ->
             locationList.clear()
+
             locationList.addAll(locations)
             locationAdapter = CheckboxListAdapter(requireContext(), locationList)
             locationListView.adapter = locationAdapter
@@ -90,13 +96,28 @@ class FilterDialogFragment : DialogFragment() {
     private fun getSelectedItems(listView: ListView): List<String> {
         val selectedItems = mutableListOf<String>()
         val checkedItemPositions = listView.checkedItemPositions
-        for (i in 0 until checkedItemPositions.size()) {
-            val position = checkedItemPositions.keyAt(i)
-            if (checkedItemPositions.valueAt(i)) {
-                val item = listView.adapter.getItem(position) as String
-                selectedItems.add(item)
+        val adapter = listView.adapter as CheckboxListAdapter // Updated adapter
+
+        if (checkedItemPositions != null) {
+            for (i in 0 until checkedItemPositions.size()) {
+                val position = checkedItemPositions.keyAt(i)
+                if (checkedItemPositions.valueAt(i)) {
+                    val item = adapter.getItem(position) as String
+                    selectedItems.add(item)
+                }
             }
         }
+
         return selectedItems
+    }
+
+    private fun selectItems(listView: ListView, selectedItems: List<String>) {
+        val adapter = listView.adapter as CheckboxListAdapter // Updated adapter
+        for (i in 0 until adapter.count) {
+            val item = adapter.getItem(i) as String
+            if (selectedItems.contains(item)) {
+                listView.setItemChecked(i, true)
+            }
+        }
     }
 }
