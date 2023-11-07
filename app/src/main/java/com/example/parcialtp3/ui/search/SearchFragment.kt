@@ -16,9 +16,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.parcialtp3.R
 import com.example.parcialtp3.data.dao.DogDao
 import com.example.parcialtp3.databinding.FragmentSearchBinding
+import com.example.parcialtp3.ui.adapter.adapter.DogAdapter
+import com.example.parcialtp3.ui.adapter.adapter.DogListener
+import com.example.parcialtp3.ui.adapter.adapter.SaveIconListener
 import com.example.parcialtp3.ui.home.CheckboxListAdapter
 import com.example.parcialtp3.ui.home.FilterDialogViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +35,14 @@ class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private val viewModel: SearchViewModel by viewModels()
     private val breedList = mutableListOf<String>()
+
+    private val dogAdapter = DogAdapter(DogListener { dog, id ->
+
+    }, SaveIconListener { id ->
+        // Handle save icon click
+    })
+
+    private lateinit var dogRecyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +57,15 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupMenu()
+        // Find the RecyclerView by ID
+        dogRecyclerView = view.findViewById(R.id.recyclerView)
+
+        // Set up the DogListAdapter
+        dogRecyclerView.adapter = dogAdapter
+
+        // Specify the layout manager (e.g., LinearLayoutManager)
+        dogRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
     }
     private fun setupMenu() {
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
@@ -61,40 +83,25 @@ class SearchFragment : Fragment() {
                 searchView.doOnLayout {
                     //searchView.clearFocus()
                 }
-
                 menuItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
                     override fun onMenuItemActionExpand(item: MenuItem): Boolean {
                         return true
                     }
-
                     override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
                         findNavController().navigateUp()
                         return true
                     }
-
                 })
-
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextChange(newText: String?): Boolean {
                         if (newText != null && newText.length > 3) {
                             fetchBreeds(newText)
-                            // Actualiza tu UI con las subrazas encontradas
+                            // Actualiza tu UI con las razas y subrazas subrazas encontradas
                         }
                         return true
                     }
-
                     override fun onQueryTextSubmit(query: String?): Boolean {
-                        //findNavController().navigate(R.id.action_searchFragment_to_booksReadListFragment)
-                        val action = query?.let {
-                            //SearchFragmentDirections.actionSearchFragmentToSearchResultListFragment(
-                                it
-                            //)
-                        }
-
-                        action?.let {
-                            findNavController().navigate(action)
-                        }
-                        return false
+                        return true
                     }
                 })
             }
@@ -106,9 +113,8 @@ class SearchFragment : Fragment() {
         }
     }
     private fun fetchBreeds(query: String) {
-        viewModel.searchDistinctBreedsAndSubbreeds(query).observe(viewLifecycleOwner) { (breeds, subbreeds) ->
-            breedList.clear()
-            breedList.addAll(breeds)
+        viewModel.getAvailableDogsByBreed(query).observe(viewLifecycleOwner) { dogs ->
+            dogAdapter.submitList(dogs)
         }
     }
 }

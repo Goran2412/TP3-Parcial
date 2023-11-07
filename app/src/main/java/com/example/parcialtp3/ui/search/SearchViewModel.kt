@@ -4,38 +4,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.parcialtp3.data.dao.DogDao
+import com.example.parcialtp3.domain.model.Dog
+import com.example.parcialtp3.domain.model.DogMapper.Companion.mapDogModelToDog
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+@HiltViewModel
 class SearchViewModel @Inject constructor(private val dao: DogDao) : ViewModel() {
-    fun searchDistinctBreedsAndSubbreeds(query: String): LiveData<Pair<List<String>, List<String>>> {
-        val resultLiveData = MediatorLiveData<Pair<List<String>, List<String>>>()
-
-        viewModelScope.launch(Dispatchers.IO) {
-            val breeds = dao.searchBreeds("%$query%")
-            val subbreeds = dao.searchSubbreeds("%$query%")
-
-            withContext(Dispatchers.Main) {
-                val breedsLiveData = MutableLiveData<List<String>>()
-                val subbreedsLiveData = MutableLiveData<List<String>>()
-                breedsLiveData.value = breeds
-                subbreedsLiveData.value = subbreeds
-
-                resultLiveData.addSource(breedsLiveData) { updatedBreeds ->
-                    val subbreeds = subbreedsLiveData.value ?: emptyList()
-                    resultLiveData.value = Pair(updatedBreeds, subbreeds)
-                }
-
-                resultLiveData.addSource(subbreedsLiveData) { updatedSubbreeds ->
-                    val breeds = breedsLiveData.value ?: emptyList()
-                    resultLiveData.value = Pair(breeds, updatedSubbreeds)
-                }
-            }
-        }
-        return resultLiveData
+    fun getAvailableDogsByBreed(query: String): LiveData<List<Dog>> {
+        return dao.getDogsByBreed(query)
+            .map { dogModelList -> mapDogModelToDog(dogModelList) }
+            .asLiveData()
     }
 }

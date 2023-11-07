@@ -8,6 +8,7 @@ import androidx.room.Update
 import com.example.parcialtp3.data.model.DogModel
 import kotlinx.coroutines.flow.Flow
 import retrofit2.http.PUT
+import javax.inject.Inject
 
 @Dao
 interface DogDao {
@@ -44,10 +45,11 @@ interface DogDao {
     @Query("SELECT DISTINCT location FROM dogs")
     fun getDistinctLocations(): Flow<List<String>>
 
-    @Query("SELECT DISTINCT subbreed FROM dogs WHERE breed LIKE :query")
-    fun searchSubbreeds(query: String): List<String>
+    @Query("SELECT * FROM dogs WHERE breed LIKE :query")
+    fun getDogsByBreed(query: String): Flow<List<DogModel>>
 
-    @Query("SELECT DISTINCT breed FROM dogs WHERE breed LIKE :query")
-    fun searchBreeds(query: String): List<String>
+    @Query("SELECT * FROM dogs WHERE subbreed LIKE :query")
+    fun getDogsBySubbreed(query: String): Flow<List<DogModel>>
+
 
 }
