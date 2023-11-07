@@ -28,4 +28,10 @@
     <string name="resultados">Resultados</string>
     <string name="detalles">Detalles</string>
 
+    <!-- Landing Page -->
+    <string name="landing_page_title">Adopción de Perritos</string>
+    <string name="landing_page_desc">Adopta a un compañerito.\nTe cambiará la vida :)</string>
+    <string name="landing_page_btnTxt">Comenzar</string>
+    <string name="landing_page_imgDesc">Imagen de la LandingPage</string> <!-- to remove the annoying warning -->
+
 </resources>
