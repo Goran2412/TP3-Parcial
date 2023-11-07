@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="PoppinsBase">
+        <item name="android:fontFamily">@font/poppinsregular</item>
+    </style>
+
+    <style name="TitlesFont">
+        <item name="android:fontFamily">@font/poppinsbold</item>
+    </style>
+
+    <style name="OtherTextsFont">
+        <item name="android:fontFamily">@font/poppinslight</item>
+    </style>
+</resources>

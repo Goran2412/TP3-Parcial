@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.parcialtp3.R
 
@@ -23,6 +25,13 @@ class LandingPageFragment : Fragment() {
 
         // oculta la appbar
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+
+        val roundButton: Button = view.findViewById(R.id.roundButton)
+
+        //para viajar al homeFragment al apretar el boton
+        roundButton.setOnClickListener {
+            findNavController().navigate(R.id.homeFragment)
+        }
 
         val viewPager: ViewPager2 = view.findViewById(R.id.imagesCarrousel)
         val adapter = ViewPagerAdapter(images)
