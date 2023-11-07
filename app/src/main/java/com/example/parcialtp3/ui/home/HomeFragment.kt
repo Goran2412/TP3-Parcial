@@ -34,7 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 
-
+private const val TAG = "HomeFragment"
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
             })
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
-        return binding.root
+
         val moreFiltersButton = binding.moreFiltersButton
 
         val text = SpannableString(getString(R.string.more_filters))
@@ -75,7 +75,10 @@ class HomeFragment : Fragment() {
 
         moreFiltersButton.movementMethod = LinkMovementMethod.getInstance()
 
-        return root
+        return binding.root
+
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -114,11 +117,6 @@ class HomeFragment : Fragment() {
         }
         setupMenu()
         setupChip()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun setupMenu() {

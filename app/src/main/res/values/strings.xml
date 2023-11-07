@@ -23,5 +23,9 @@
     <string name="adopt_btn_text">Adoptar</string>
     <string name="mis_adopciones">Mis adopciones</string>
     <string name="peso_del_perro_en_kg">Peso del perro (en KG)</string>
+    <string name="filtros">Filtros</string>
+    <string name="b_squeda">Búsqueda</string>
+    <string name="resultados">Resultados</string>
+    <string name="detalles">Detalles</string>
 
 </resources>

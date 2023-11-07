@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_filterDialogFragment"
             app:destination="@id/filterDialogFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
 
     <fragment
@@ -44,7 +47,7 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.parcialtp3.ui.search.SearchFragment"
-        android:label="SearchFragment" >
+        android:label="@string/b_squeda" >
         <action
             android:id="@+id/action_searchFragment_to_searchResultListFragment"
             app:destination="@id/searchResultListFragment" />
@@ -52,16 +55,16 @@
     <fragment
         android:id="@+id/searchResultListFragment"
         android:name="com.example.parcialtp3.ui.searchResult.SearchResultListFragment"
-        android:label="SearchResultListFragment" />
+        android:label="@string/resultados" />
     <fragment
         android:id="@+id/filterDialogFragment"
         android:name="com.example.parcialtp3.ui.home.FilterDialogFragment"
-        android:label="FilterDialogFragment" />
+        android:label="@string/filtros" />
 
 <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.parcialtp3.ui.details.DetailsFragment"
-        android:label="Detalles"
+        android:label="@string/detalles"
         tools:layout="@layout/fragment_details">
 
     <argument
