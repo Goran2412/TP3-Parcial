@@ -59,7 +59,7 @@
         android:label="@string/resultados" />
     <fragment
         android:id="@+id/filterDialogFragment"
-        android:name="com.example.parcialtp3.ui.home.FilterDialogFragment"
+        android:name="com.example.parcialtp3.ui.filter.FilterDialogFragment"
         android:label="@string/filtros" />
 
     <fragment

@@ -1,6 +1,7 @@
-package com.example.parcialtp3.ui.home
+package com.example.parcialtp3.ui.filter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,20 @@ class CheckboxListAdapter(private val context: Context, private val items: List<
         return position.toLong()
     }
 
+    // Define an interface for item selection events
+    interface OnItemSelectionListener {
+        fun onItemSelectionChanged(item: String, isSelected: Boolean)
+    }
+
+    // Create a variable to hold the listener
+    private var itemSelectionListener: OnItemSelectionListener? = null
+
+    // Setter method for the listener
+    fun setOnItemSelectionListener(listener: OnItemSelectionListener) {
+        this.itemSelectionListener = listener
+    }
+
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val item = getItem(position) as String
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -34,24 +49,16 @@ class CheckboxListAdapter(private val context: Context, private val items: List<
         checkBox.text = item
         checkBox.isChecked = checkedItems[position]
 
-        checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
-            checkedItems[position] = isChecked
-        }
+//        checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+//            checkedItems[position] = isChecked
+//        }
 
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            Log.d("CheckboxListAdapter", "Item at position $position is checked: $isChecked. Text :${checkBox.text}")
+            // You can notify the change to the parent fragment/activity if needed
+        }
         return itemView
     }
-
-    fun getCheckedItems(): List<String> {
-        val selectedItems = mutableListOf<String>()
-        for (i in items.indices) {
-            if (checkedItems[i]) {
-                selectedItems.add(items[i])
-            }
-        }
-        return selectedItems
-    }
-
-    fun resetCheckedItems() {
-        Arrays.fill(checkedItems, false)
-    }
 }
+
+data class FilterItem(val category: String, val itemText: String)

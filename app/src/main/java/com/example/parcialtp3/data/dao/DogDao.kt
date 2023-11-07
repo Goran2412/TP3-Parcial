@@ -35,4 +35,13 @@ interface DogDao {
     @Query("UPDATE dogs SET isAdopted = 1, isFavourite = 0 WHERE id = :dogId")
     suspend fun adoptDog(dogId: Int)
 
+    @Query("SELECT DISTINCT breed FROM dogs")
+    fun getDistinctBreeds(): List<String>
+
+    @Query("SELECT DISTINCT subbreed FROM dogs")
+    fun getDistinctSubbreeds(): List<String>
+
+    @Query("SELECT DISTINCT location FROM dogs")
+    fun getDistinctLocations(): Flow<List<String>>
+
 }
