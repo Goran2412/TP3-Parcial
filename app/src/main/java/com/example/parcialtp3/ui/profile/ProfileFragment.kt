@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.parcialtp3.databinding.FragmentProfileBinding
+import com.example.parcialtp3.ui.ProfileImageChangeListener
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -58,6 +59,11 @@ class ProfileFragment: Fragment() {
                     Picasso.get()
                         .load(imageUrl)
                         .into(binding.profileImage)
+
+                    if (activity is ProfileImageChangeListener) {
+                        (activity as ProfileImageChangeListener).onProfileImageChanged(imageUrl)
+                    }
+
                 }
 
                 imageUrlInput.visibility = View.GONE

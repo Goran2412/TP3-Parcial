@@ -1,8 +1,10 @@
 package com.example.parcialtp3.ui.details
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +24,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
+
+private const val TAG = "DetailsFragment"
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
@@ -120,10 +124,23 @@ class DetailsFragment : Fragment() {
     private fun getData() {
 
         //Images
-        val ownerImageUrl = "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais"
-        Picasso.get()
-            .load(ownerImageUrl)
-            .into(dogOwnerImage)
+//        val ownerImageUrl = "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais"
+//        Picasso.get()
+//            .load(ownerImageUrl)
+//            .into(dogOwnerImage)
+
+        val detailSharedPreferences = requireActivity().getSharedPreferences("ProfilePreferences", Context.MODE_PRIVATE)
+        val imageUrl = detailSharedPreferences.getString("ProfileImage", null)
+
+        if (imageUrl != null) {
+            Picasso.get()
+                .load(imageUrl)
+                .into(dogOwnerImage)
+        } else{
+            Picasso.get()
+                .load(R.drawable.ic_profile)
+                .into(dogOwnerImage)
+        }
 
         val dogImageUrls = viewModel.dog.images ?: emptyList()
         dogImages = dogImageUrls.map { DogImage(it) }

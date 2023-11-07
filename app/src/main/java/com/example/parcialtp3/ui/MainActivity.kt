@@ -32,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 private const val TAG = "MainActivity"
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ProfileImageChangeListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -148,7 +148,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
+
         super.onResume()
+        Log.d(TAG, "onResume")
         binding.drawerLayout.closeDrawers()
         // Clear the selected item in the navigation drawer
         val navigationView =
@@ -178,4 +180,20 @@ class MainActivity : AppCompatActivity() {
 
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(listener)
     }
+
+    override fun onProfileImageChanged(imageUrl: String?) {
+        // Update the profile image in the navigation drawer here
+        if (imageUrl != null) {
+            val navView: NavigationView = binding.navView
+            val headerView = navView.getHeaderView(0)
+            val navImageView = headerView.findViewById<ImageView>(R.id.profileImage)
+            Picasso.get()
+                .load(imageUrl)
+                .into(navImageView)
+        }
+    }
+}
+
+interface ProfileImageChangeListener {
+    fun onProfileImageChanged(imageUrl: String?)
 }
