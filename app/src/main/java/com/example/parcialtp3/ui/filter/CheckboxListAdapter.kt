@@ -10,9 +10,13 @@ import android.widget.CheckBox
 import com.example.parcialtp3.R
 import java.util.Arrays
 
-class CheckboxListAdapter(private val context: Context, private val items: List<String>) : BaseAdapter() {
-
+class CheckboxListAdapter(private val context: Context, private val items: List<CategorizedItem>) : BaseAdapter() {
     private val checkedItems = BooleanArray(items.size)
+    private val sharedPreferences = context.getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
+
+    init {
+        loadSavedSelection()
+    }
 
     override fun getCount(): Int {
         return items.size
@@ -26,39 +30,37 @@ class CheckboxListAdapter(private val context: Context, private val items: List<
         return position.toLong()
     }
 
-    // Define an interface for item selection events
-    interface OnItemSelectionListener {
-        fun onItemSelectionChanged(item: String, isSelected: Boolean)
-    }
-
-    // Create a variable to hold the listener
-    private var itemSelectionListener: OnItemSelectionListener? = null
-
-    // Setter method for the listener
-    fun setOnItemSelectionListener(listener: OnItemSelectionListener) {
-        this.itemSelectionListener = listener
-    }
-
-
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val item = getItem(position) as String
+        val item = getItem(position) as CategorizedItem
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val itemView = inflater.inflate(R.layout.checkbox_list_item, null)
 
         val checkBox = itemView.findViewById<CheckBox>(R.id.checkbox)
-        checkBox.text = item
+        checkBox.text = item.item
         checkBox.isChecked = checkedItems[position]
 
-//        checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
-//            checkedItems[position] = isChecked
-//        }
-
         checkBox.setOnCheckedChangeListener { _, isChecked ->
-            Log.d("CheckboxListAdapter", "Item at position $position is checked: $isChecked. Text :${checkBox.text}")
-            // You can notify the change to the parent fragment/activity if needed
+            checkedItems[position] = isChecked
+            saveSelectedItems()
+            Log.d("CheckboxListAdapter", "Category: ${item.category}, Item: ${item.item} is checked: $isChecked")
         }
         return itemView
     }
+
+    private fun saveSelectedItems() {
+        val editor = sharedPreferences.edit()
+        for (i in items.indices) {
+            val key = "selected_$i"
+            editor.putBoolean(key, checkedItems[i])
+        }
+        editor.apply()
+    }
+
+    private fun loadSavedSelection() {
+        for (i in items.indices) {
+            val key = "selected_$i"
+            checkedItems[i] = sharedPreferences.getBoolean(key, false)
+        }
+    }
 }
 
-data class FilterItem(val category: String, val itemText: String)
