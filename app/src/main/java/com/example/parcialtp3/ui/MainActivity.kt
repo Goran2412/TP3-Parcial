@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        sharedPreferences = getSharedPreferences("ProfilePreferences", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val isDarkMode = sharedPreferences.getBoolean("darkMode", false)
 
         if (isDarkMode) {
