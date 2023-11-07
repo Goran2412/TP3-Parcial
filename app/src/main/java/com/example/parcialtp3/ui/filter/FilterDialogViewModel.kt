@@ -1,4 +1,4 @@
-package com.example.parcialtp3.ui.home
+package com.example.parcialtp3.ui.filter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData

@@ -1,4 +1,4 @@
-package com.example.parcialtp3.ui.home
+package com.example.parcialtp3.ui.filter
 
 import android.content.Context
 import android.view.LayoutInflater

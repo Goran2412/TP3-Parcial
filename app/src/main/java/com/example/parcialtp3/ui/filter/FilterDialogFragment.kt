@@ -1,21 +1,16 @@
-package com.example.parcialtp3.ui.home
+package com.example.parcialtp3.ui.filter
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ListView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.example.parcialtp3.R
-import com.example.parcialtp3.data.database.DogDatabase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 

@@ -65,46 +65,4 @@ class HomeViewModel @Inject constructor(val dogDao: DogDao, private val getAllDo
         }
     }
 
-
-//    fun getAllDogs() {
-//        Log.d(TAG, "getAllDogs()")
-//        _dogsListState.postValue(Result.Loading)
-//        viewModelScope.launch {
-//            val booksResult = getAllDogsUseCase()
-//            _dogsListState.postValue(booksResult)
-//        }
-//    }
-
-//    fun getAllBooks() {
-//        _dogsListState.postValue(Result.Loading)
-//        viewModelScope.launch {
-//            val booksResult = getAllDogsUseCase()
-//            _dogsListState.postValue(booksResult)
-//        }
-//    }
-
-//    init {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val newDog = DogModel(
-//                name = "Buddy",
-//                age = 3,
-//                gender = "Male",
-//                description = "Friendly and playful",
-//                weight = 15.5,
-//                location = "Shelter",
-//                breed = MainBreed.AUSTRALIAN,
-//                images = listOf("image1.jpg", "image2.jpg"),
-//                adopter = DogModel.Adopter("John Doe", "555-555-5555"),
-//                isAdopted = false,
-//                observations = "No known health issues"
-//            )
-//
-//           // dogDao.insert(newDog)
-//
-//            val coso = dogDao.getAllDogs()
-//            Log.d("DOGS", "mis dogs $coso")
-//        }
-//
-//    }
-
 }
