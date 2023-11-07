@@ -22,6 +22,7 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.parcialtp3.R
+import com.example.parcialtp3.common.ProfileImageChangeListener
 import com.example.parcialtp3.databinding.ActivityMainBinding
 import com.example.parcialtp3.ui.settings.SettingsActivity
 import com.google.android.material.navigation.NavigationView
@@ -194,6 +195,3 @@ class MainActivity : AppCompatActivity(), ProfileImageChangeListener {
     }
 }
 
-interface ProfileImageChangeListener {
-    fun onProfileImageChanged(imageUrl: String?)
-}

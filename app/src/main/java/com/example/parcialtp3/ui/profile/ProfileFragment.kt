@@ -10,8 +10,9 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.parcialtp3.common.ProfileImageChangeListener
 import com.example.parcialtp3.databinding.FragmentProfileBinding
-import com.example.parcialtp3.ui.ProfileImageChangeListener
+
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
