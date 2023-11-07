@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/landingPageFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -87,5 +87,11 @@
             app:popUpTo="@id/landingPageFragment"
             app:popUpToInclusive="true" />
     </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.parcialtp3.ui.login.LoginFragment"
+        android:label="Iniciar sesión"
+        tools:layout="@layout/fragment_login" />
 
 </navigation>

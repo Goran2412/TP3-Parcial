@@ -32,6 +32,10 @@
     <string name="landing_page_title">Adopción de Perritos</string>
     <string name="landing_page_desc">Adopta a un compañerito.\nTe cambiará la vida :)</string>
     <string name="landing_page_btnTxt">Comenzar</string>
-    <string name="landing_page_imgDesc">Imagen de la LandingPage</string> <!-- to remove the annoying warning -->
+    <string name="landing_page_imgDesc">Imagen de la LandingPage</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="password">Contraseña</string>
+    <string name="nombre_de_usuario">Nombre de usuario</string>
+    <string name="iniciar_sesion">Iniciar sesión</string> <!-- to remove the annoying warning -->
 
 </resources>
