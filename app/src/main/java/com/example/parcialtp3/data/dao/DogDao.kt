@@ -45,10 +45,10 @@ interface DogDao {
     @Query("SELECT DISTINCT location FROM dogs")
     fun getDistinctLocations(): Flow<List<String>>
 
-    @Query("SELECT * FROM dogs WHERE breed LIKE :query")
+    @Query("SELECT * FROM dogs WHERE breed LIKE '%' || :query || '%'")
     fun getDogsByBreed(query: String): Flow<List<DogModel>>
 
-    @Query("SELECT * FROM dogs WHERE subbreed LIKE :query")
+    @Query("SELECT * FROM dogs WHERE subbreed LIKE '%' || :query || '%'")
     fun getDogsBySubbreed(query: String): Flow<List<DogModel>>
 
 
