@@ -31,6 +31,11 @@ class DogAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(dog: Dog) {
             binding.dog = dog
+            binding.dogName.text = dog.name
+            binding.dogAgeText.text = dog.age.toString()
+            binding.dogBreedName.text = dog.breed
+            binding.dogGenderText.text = dog.gender
+            binding.dogSubBreedName.text = dog.subbreed
             binding.clickListener = clickListener
             binding.saveIconListener = saveIconListener
             binding.executePendingBindings()
