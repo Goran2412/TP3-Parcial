@@ -1,4 +1,4 @@
-package com.example.parcialtp3.ui.dogslist.services
+package com.example.parcialtp3.ui.adapter.services
 
 import retrofit2.Response
 import retrofit2.http.GET

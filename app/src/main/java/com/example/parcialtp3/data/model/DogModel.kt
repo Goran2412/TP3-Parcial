@@ -8,20 +8,21 @@ import androidx.room.PrimaryKey
 data class DogModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val name: String,
-    val age: Int,
-    val gender: String,
-    val description: String,
-    val weight: Double,
-    val location: String,
-    val breed: MainBreed,
-    val images: List<String>,
-    val adopter: Adopter?,
-    val isAdopted: Boolean,
-    val observations: String,
- //   val isFavorite: Boolean,
+    val name: String?,
+    val age: Int?,
+    val gender: String?,
+    val description: String?,
+    val weight: Double?,
+    val location: String?,
+    val breed: String?,
+    val subbreed: String?,
+    val images: List<String>?,
+    val adopterModel: AdopterModel?,
+    val isAdopted: Boolean?,
+    val observations: String?,
+    var isFavourite: Boolean
 ) {
-    data class Adopter(
+    data class AdopterModel(
         val name: String,
         val phone: String
     )

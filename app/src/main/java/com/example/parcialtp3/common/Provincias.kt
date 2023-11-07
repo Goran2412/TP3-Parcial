@@ -1,6 +1,6 @@
-package com.example.parcialtp3.common;
+package com.example.parcialtp3.common
 
-public enum Provincias {
+enum class Provincias {
     BUENOS_AIRES,
     CATAMARCA,
     CHACO,
@@ -21,7 +21,5 @@ public enum Provincias {
     SAN_LUIS,
     SANTA_CRUZ,
     SANTA_FE,
-    SANTIAGO_DEL_ESTERO,
-    TIERRA_DEL_FUEGO,
-    TUCUMAN
+    SANTIAGO_DEL_ESTERO
 }

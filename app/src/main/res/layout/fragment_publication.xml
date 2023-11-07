@@ -1,7 +1,14 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/publication_form"
     tools:context=".ui.publication.PublicationFragment">
 
     <LinearLayout
@@ -10,86 +17,172 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <Spinner
-            android:id="@+id/dogBreed"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dogBreedLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:hint="Raza del perro" />
+            android:hint="Raza del perro">
 
-        <Spinner
-            android:id="@+id/dogSubBreed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:hint="Subraza del perro (si aplica)" />
-
-
-        <EditText
-            android:id="@+id/dogName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombre del perro" />
-
-        <EditText
-            android:id="@+id/dogAge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Edad del perro"
-            android:layout_marginBottom="10dp"
-            android:inputType="number" />
-
-        <RadioGroup
-            android:id="@+id/dogGender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/male"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/dogBreed"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Macho" />
+                android:layout_marginBottom="20dp"
+                android:clickable="true"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:inputType="none"
+                tools:ignore="KeyboardInaccessibleWidget" />
 
-            <RadioButton
-                android:id="@+id/female"
-                android:layout_width="wrap_content"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dogSubBreedLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:hint="Subraza del perro (si aplica)">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/dogSubBreed"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hembra" />
-        </RadioGroup>
+                android:layout_marginBottom="20dp"
+                android:inputType="none"
+                android:clickable="true"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                tools:ignore="KeyboardInaccessibleWidget" />
 
-        <EditText
-            android:id="@+id/dogDescription"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dog_name_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="Descripción del perro" />
+            android:hint="Nombre del perro">
 
-        <EditText
-            android:id="@+id/dogWeight"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dogName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dog_age_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Peso del perro"
-            android:layout_marginBottom="20dp"
-            android:inputType="numberDecimal" />
+            android:hint="Edad del perro">
 
-        <Spinner
-            android:id="@+id/dogLocation"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dogAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dogGenderLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="Ubicación del perro" />
+            android:hint="Género del perro">
 
+            <RadioGroup
+                android:id="@+id/dogGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
-        <Button
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Macho" />
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hembra" />
+            </RadioGroup>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dog_description_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción del perro">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dogDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dog_weight_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Peso del perro">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dogWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dogLocationLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/ubicacion_del_perro">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/dogLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:inputType="none"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                tools:ignore="KeyboardInaccessibleWidget" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonPublicar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Publicar"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="100dp"/>
+            android:layout_marginBottom="100dp" />
 
     </LinearLayout>
 </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_publication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

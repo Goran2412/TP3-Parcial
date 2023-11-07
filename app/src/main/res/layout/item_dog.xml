@@ -1,9 +1,23 @@
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="dog"
+            type="com.example.parcialtp3.domain.model.Dog" />
+        <variable
+            name="clickListener"
+            type="com.example.parcialtp3.ui.adapter.adapter.DogListener" />
+
+        <variable
+            name="saveIconListener"
+            type="com.example.parcialtp3.ui.adapter.adapter.SaveIconListener" />
+    </data>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/elementDogRV"
@@ -11,10 +25,12 @@
         android:layout_height="140dp"
         android:layout_marginStart="84dp"
         android:layout_marginTop="56dp"
-        android:background="@drawable/rounded_background"
         android:contentDescription="Item de la RV"
+        android:onClick="@{() -> clickListener.onClick(dog,dog.id)}"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_adoption"/>
 
     <TextView
         android:id="@+id/dogName"
@@ -23,6 +39,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="68dp"
         android:text="Nombre"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
         app:layout_constraintTop_toTopOf="@id/elementDogRV" />
@@ -32,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:textColor="?attr/colorOnPrimary"
         android:layout_marginTop="120dp"
         android:text="Subraza"
         android:textSize="15sp"
@@ -42,6 +60,7 @@
         android:id="@+id/subBreedPawsIc"
         android:layout_width="12dp"
         android:layout_height="12dp"
+
         android:layout_marginStart="4dp"
         android:layout_marginTop="124dp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
@@ -64,6 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
+        android:textColor="?attr/colorOnPrimary"
         android:text="Raza"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
@@ -76,6 +96,7 @@
         android:layout_marginStart="200dp"
         android:layout_marginTop="116dp"
         android:text="Género"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
         app:layout_constraintTop_toTopOf="@id/elementDogRV" />
@@ -86,6 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="148dp"
         android:layout_marginTop="116dp"
+        android:textColor="?attr/colorOnPrimary"
         android:text="Edad"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
@@ -93,12 +115,15 @@
 
     <ImageView
         android:id="@+id/saveIcon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="224dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="200dp"
+        app:isFavourite="@{dog.isFavourite}"
+        android:onClick="@{() -> saveIconListener.onClick(dog.id)}"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="@id/elementDogRV"
         app:layout_constraintTop_toTopOf="@id/elementDogRV"
         app:srcCompat="@drawable/ic_save" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

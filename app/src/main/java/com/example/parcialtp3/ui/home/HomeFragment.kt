@@ -12,19 +12,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.parcialtp3.common.Result
 
-import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.parcialtp3.R
 
 import com.example.parcialtp3.databinding.FragmentHomeBinding
+import com.example.parcialtp3.ui.adapter.adapter.DogListAdapter
+import com.example.parcialtp3.ui.adapter.adapter.DogListener
+import com.example.parcialtp3.ui.adapter.adapter.SaveIconListener
 import dagger.hilt.android.AndroidEntryPoint
-
 
 
 private const val TAG = "HomeFragment"
@@ -42,26 +43,40 @@ class HomeFragment : Fragment() {
 
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.recyclerView.adapter = DogListAdapter(DogListener { dog, dogId ->
+            Log.d(TAG, "dog${dog.name} id $dogId")
+            //  viewModel.updateDogFavouriteStatus(dogId, !dog.isFavourite)
+        },
+            SaveIconListener { dogId ->
+                Log.d(TAG, "$dogId")
+                viewModel.updateDogFavouriteStatus(dogId)
+            })
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.testInsert()
+          // viewModel.testInsert()
 
         viewModel.dogsListState.observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Success -> {
-                    Log.d(TAG, "success!")
-                    Log.d(TAG, "${it.data}")
+                    handleLoading(false)
+                    val adapter = binding.recyclerView.adapter as DogListAdapter
+                    adapter.submitList(it.data)
+                    Log.d(TAG, "checking favourite ${it.data} ")
                 }
 
                 is Result.Loading -> {
-                   Log.d(TAG, "loading...")
+                    handleLoading(true)
+                    Log.d(TAG, "loading...")
                 }
 
                 is Result.Error -> {
+                    handleLoading(false)
                     Log.d(TAG, "error! ${it.message}")
                 }
 
@@ -70,6 +85,7 @@ class HomeFragment : Fragment() {
         }
         setupMenu()
     }
+
 
     private fun setupMenu() {
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
@@ -92,7 +108,17 @@ class HomeFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return true
             }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED).also {
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun handleLoading(isLoading: Boolean) {
+        with(binding) {
+            if (isLoading) {
+                progressBarHome.visibility = View.VISIBLE
+            } else {
+                progressBarHome.visibility = View.GONE
+            }
         }
     }
+
 }
