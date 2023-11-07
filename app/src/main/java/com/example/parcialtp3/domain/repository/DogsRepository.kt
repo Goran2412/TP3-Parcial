@@ -3,6 +3,7 @@ package com.example.parcialtp3.domain.repository
 import com.example.parcialtp3.common.Result
 import com.example.parcialtp3.data.model.DogModel
 import com.example.parcialtp3.data.response.DogBreedsResponse
+import com.example.parcialtp3.data.response.DogImagesResponse
 import com.example.parcialtp3.domain.model.Dog
 import kotlinx.coroutines.flow.Flow
 
@@ -12,5 +13,8 @@ interface DogsRepository {
 
     fun getFavoriteDogs(): Flow<Result<List<Dog>>>
     suspend fun addDog(dog: DogModel): Result<Unit>
+
+    suspend fun getRandomImages(breed: String, count: Int): Result<DogImagesResponse>
+
 
 }

@@ -21,6 +21,7 @@ object RoomModule {
     fun provideRoom(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, DogDatabase::class.java, DOG_DATABASE_NAME)
             .addTypeConverter(Converters())
+            .fallbackToDestructiveMigration()
             .build()
     @Singleton
     @Provides

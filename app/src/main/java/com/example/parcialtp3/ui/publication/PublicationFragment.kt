@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.parcialtp3.R
@@ -73,8 +75,55 @@ class PublicationFragment : Fragment() {
         }
 
         viewModel.selectedBreed.observe(viewLifecycleOwner) { selectedBreed ->
-            val breedWithSubBreeds =
-                viewModel.breedsList.value?.find { it.breedName == selectedBreed }
+            // Cuando se selecciona una raza, obtén las imágenes aleatorias para esa raza
+            viewModel.getRandomImages(selectedBreed)
+
+            val breedWithSubBreeds = viewModel.breedsList.value?.find { it.breedName == selectedBreed }
+            if (breedWithSubBreeds != null && breedWithSubBreeds.subBreeds.isNotEmpty()) {
+                // If the selected breed has sub-breeds, make dogSubBreedLayout visible
+                binding.dogSubBreedLayout.visibility = View.VISIBLE
+                // Populate dogSubBreed AutoCompleteTextView with sub-breeds
+                val subBreedAdapter = ArrayAdapter(requireContext(), R.layout.list_type_enum, breedWithSubBreeds.subBreeds)
+                binding.dogSubBreed.setAdapter(subBreedAdapter)
+            } else {
+                // If no sub-breeds, hide dogSubBreedLayout
+                binding.dogSubBreedLayout.visibility = View.GONE
+            }
+        }
+
+
+        viewModel.randomImages.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Success -> {
+                    // Aquí tienes acceso a la lista de URLs de las imágenes
+                    val imageUrls = result.data?.message
+                    Log.d(TAG, "Imágenes obtenidas: $imageUrls")
+
+                    // Limpia el LinearLayout antes de agregar las nuevas vistas
+                    binding.imageUrlsLayout.removeAllViews()
+
+                    // Crea un TextView para cada URL y lo agrega al LinearLayout
+                    imageUrls?.forEach { imageUrl ->
+                        val textView = TextView(context)
+                        textView.text = imageUrl
+                        binding.imageUrlsLayout.addView(textView)
+                    }
+                }
+                is Result.Error -> {
+                    // Manejar el error aquí
+                    Log.d(TAG, "Error al obtener imágenes: ${result.message}")
+                }
+                is Result.Loading -> {
+                    // Manejar el estado de carga aquí si es necesario
+                    Log.d(TAG, "Cargando imágenes...")
+                }
+                else -> { Unit }
+            }
+        }
+
+        viewModel.selectedBreed.observe(viewLifecycleOwner) { selectedBreed ->
+            val breedWithSubBreeds = viewModel.breedsList.value?.find { it.breedName == selectedBreed }
+
             if (breedWithSubBreeds != null && breedWithSubBreeds.subBreeds.isNotEmpty()) {
                 // If the selected breed has sub-breeds, make dogSubBreedLayout visible
                 binding.dogSubBreedLayout.visibility = View.VISIBLE
