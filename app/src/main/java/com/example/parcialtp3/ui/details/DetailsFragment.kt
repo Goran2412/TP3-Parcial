@@ -151,7 +151,7 @@ class DetailsFragment : Fragment() {
         dogAgeText.text = viewModel.dog.age?.toString() ?: "Unknown"
         dogGenreText.text = viewModel.dog.gender ?: "Unknown"
 
-        if (viewModel.dog.gender == "Macho") {
+        if (viewModel.dog.gender == "Male") {
             dogGenreIcon.setImageResource(R.drawable.ic_male)
         } else {
             dogGenreIcon.setImageResource(R.drawable.ic_female)
