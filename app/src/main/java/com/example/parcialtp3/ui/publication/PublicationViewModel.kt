@@ -8,10 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.parcialtp3.common.Result
 import com.example.parcialtp3.data.model.DogModel
 import com.example.parcialtp3.data.response.DogBreedsResponse
+import com.example.parcialtp3.data.response.DogImagesResponse
 import com.example.parcialtp3.domain.model.Dog
 import com.example.parcialtp3.domain.usecase.AddDogToAdoptionListUseCase
 import com.example.parcialtp3.domain.usecase.GetBreedsFromApiUseCase
 import com.example.parcialtp3.ui.publication.components.BreedWithSubBreeds
+import com.example.parcialtp3.domain.usecase.GetRandomImagesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,10 +25,10 @@ private const val TAG = "PublicationViewModel"
 @HiltViewModel
 class PublicationViewModel @Inject constructor(
     private val getBreedsFromApiUseCase: GetBreedsFromApiUseCase,
-    private val addDogToAdoptionListUseCase: AddDogToAdoptionListUseCase
-) :
-    ViewModel() {
+    private val addDogToAdoptionListUseCase: AddDogToAdoptionListUseCase,
+    private val getRandomImagesUseCase: GetRandomImagesUseCase
 
+) : ViewModel() {
     private val _breedsListState = MutableLiveData<Result<DogBreedsResponse>>()
     val breedsListState: LiveData<Result<DogBreedsResponse>> = _breedsListState
 
@@ -35,6 +37,10 @@ class PublicationViewModel @Inject constructor(
 
     private val _selectedBreed = MutableLiveData<String>()
     val selectedBreed: LiveData<String> = _selectedBreed
+
+    private val _randomImages = MutableLiveData<Result<DogImagesResponse>>()
+    val randomImages: LiveData<Result<DogImagesResponse>>
+        get() = _randomImages
 
     private val _isFormValid = MutableLiveData<Boolean>()
     val isFormValid: LiveData<Boolean>
@@ -150,6 +156,7 @@ class PublicationViewModel @Inject constructor(
         validateForm()
     }
 
+
     fun setSelectedBreed(breed: String) {
         _selectedBreed.value = breed
     }
@@ -158,6 +165,16 @@ class PublicationViewModel @Inject constructor(
         _isValidGender.value = gender.isNotEmpty()
         validateForm()
     }
+
+    fun getRandomImages(breed: String, count: Int = 5) {
+        viewModelScope.launch {
+            val result = getRandomImagesUseCase(breed.lowercase(), count)
+            if (result is Result.Success) {
+                _randomImages.postValue(result)
+            }
+        }
+    }
+
 
     fun getAllBreeds() {
         _breedsListState.postValue(Result.Loading)
@@ -194,4 +211,7 @@ class PublicationViewModel @Inject constructor(
 
 }
 
-
+data class BreedWithSubBreeds(
+    val breedName: String,
+    val subBreeds: List<String>
+)

@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.parcialtp3.R
@@ -23,6 +25,7 @@ class PublicationFragment : Fragment() {
 
     private lateinit var binding: FragmentPublicationBinding
     private val viewModel: PublicationViewModel by viewModels()
+    private lateinit var imageUrls: List<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,8 +76,25 @@ class PublicationFragment : Fragment() {
         }
 
         viewModel.selectedBreed.observe(viewLifecycleOwner) { selectedBreed ->
-            val breedWithSubBreeds =
-                viewModel.breedsList.value?.find { it.breedName == selectedBreed }
+            // Cuando se selecciona una raza, obtén las imágenes aleatorias para esa raza
+            viewModel.getRandomImages(selectedBreed)
+
+            val breedWithSubBreeds = viewModel.breedsList.value?.find { it.breedName == selectedBreed }
+            if (breedWithSubBreeds != null && breedWithSubBreeds.subBreeds.isNotEmpty()) {
+                // If the selected breed has sub-breeds, make dogSubBreedLayout visible
+                binding.dogSubBreedLayout.visibility = View.VISIBLE
+                // Populate dogSubBreed AutoCompleteTextView with sub-breeds
+                val subBreedAdapter = ArrayAdapter(requireContext(), R.layout.list_type_enum, breedWithSubBreeds.subBreeds)
+                binding.dogSubBreed.setAdapter(subBreedAdapter)
+            } else {
+                // If no sub-breeds, hide dogSubBreedLayout
+                binding.dogSubBreedLayout.visibility = View.GONE
+            }
+        }
+
+        viewModel.selectedBreed.observe(viewLifecycleOwner) { selectedBreed ->
+            val breedWithSubBreeds = viewModel.breedsList.value?.find { it.breedName == selectedBreed }
+
             if (breedWithSubBreeds != null && breedWithSubBreeds.subBreeds.isNotEmpty()) {
                 // If the selected breed has sub-breeds, make dogSubBreedLayout visible
                 binding.dogSubBreedLayout.visibility = View.VISIBLE
@@ -106,6 +126,26 @@ class PublicationFragment : Fragment() {
                     "",
                     false
                 ) // Clear the text without triggering the AutoComplete dropdown
+            }
+        }
+
+        //guarda las imagenes acordes a la raza en "imageUrls"
+        viewModel.randomImages.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Success -> {
+                    // Aquí tienes acceso a la lista de URLs de las imágenes
+                    imageUrls = result.data.message
+                    Log.d(TAG, "Imágenes obtenidas: $imageUrls")
+                }
+                is Result.Error -> {
+                    // Manejar el error aquí
+                    Log.d(TAG, "Error al obtener imágenes: ${result.message}")
+                }
+                is Result.Loading -> {
+                    // Manejar el estado de carga aquí si es necesario
+                    Log.d(TAG, "Cargando imágenes...")
+                }
+                else -> { Unit }
             }
         }
     }
@@ -215,7 +255,7 @@ class PublicationFragment : Fragment() {
                     location = dogLocation,
                     breed = breed,
                     subbreed = if (binding.dogSubBreedLayout.visibility == View.VISIBLE) subBreed else null,
-                    images = listOf("https://images.dog.ceo/breeds/airedale/n02096051_6799.jpg"), // You can add image paths as needed
+                    images = imageUrls,
                     adopterModel = null, // Set to null if not adopted yet
                     isAdopted = false,
                     observations = "No special notes",
