@@ -66,15 +66,9 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="detailsFragment">
+                  <entry key="dogsCatalogFragment">
                     <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="38" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
+                      <LayoutPositions />
                     </value>
                   </entry>
                   <entry key="favouritesFragment">
@@ -142,6 +136,15 @@
                             <option name="x" value="31" />
                             <option name="y" value="354" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_searchFragment_to_searchResultListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

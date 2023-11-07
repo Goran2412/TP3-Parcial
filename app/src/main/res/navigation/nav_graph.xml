@@ -39,13 +39,6 @@
         tools:layout="@layout/fragment_profile" />
 
     <fragment
-<<<<<<< HEAD
-        android:id="@+id/dogsCatalogFragment"
-        android:name="com.example.parcialtp3.ui.adapter.DogsListFragment"
-        android:label="Perros"
-        tools:layout="@layout/dogs_recycler_view" />
-
-    <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.parcialtp3.ui.search.SearchFragment"
         android:label="SearchFragment" >
@@ -58,10 +51,10 @@
         android:name="com.example.parcialtp3.ui.searchResult.SearchResultListFragment"
         android:label="SearchResultListFragment" />
 
-=======
+<fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.parcialtp3.ui.details.DetailsFragment"
         android:label="Detalles"
         tools:layout="@layout/fragment_details" />
->>>>>>> lg/feature/detailScreen
+
 </navigation>
